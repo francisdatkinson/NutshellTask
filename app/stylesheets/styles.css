@@ -1,0 +1,271 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap");
+/* line 4, ../sass/styles.scss */
+body {
+  background: #f2f2f2;
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  border: 0;
+  user-select: none;
+  padding-top: 7rem;
+}
+
+/* line 13, ../sass/styles.scss */
+nav {
+  height: 5rem;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  top: 0;
+  width: 100%;
+  background: #62bd20;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
+}
+/* line 25, ../sass/styles.scss */
+nav .logo {
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center center;
+  background-image: url(../img/logo.svg);
+  width: 12vmin;
+  height: 12vmin;
+  max-width: 6rem;
+  max-height: 6rem;
+  position: relative;
+  top: 1vmin;
+  left: 2vmin;
+  border-radius: 6vmin;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+/* line 42, ../sass/styles.scss */
+nav .logo:hover {
+  background-image: url(../img/logoHover.svg);
+}
+/* line 47, ../sass/styles.scss */
+nav .search {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* line 53, ../sass/styles.scss */
+nav .search input {
+  height: 1.5em;
+  padding: 0.2em;
+  border: none;
+}
+/* line 58, ../sass/styles.scss */
+nav .search input:focus {
+  outline: none;
+}
+
+/* line 68, ../sass/styles.scss */
+.recipeListWrapper {
+  display: flex;
+  flex-flow: column;
+}
+/* line 72, ../sass/styles.scss */
+.recipeListWrapper .recipeList {
+  display: flex;
+  flex-flow: row wrap;
+  margin: auto;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  max-width: 1080px;
+}
+/* line 80, ../sass/styles.scss */
+.recipeListWrapper .recipeList .recipe {
+  flex-basis: 48%;
+  height: 15em;
+  max-height: 15em;
+  padding: 2vmin;
+  box-sizing: border-box;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
+  margin-bottom: 1rem;
+  overflow: hidden;
+  border-radius: 0.2rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+/* line 93, ../sass/styles.scss */
+.recipeListWrapper .recipeList .recipe.sentinel {
+  opacity: 0;
+  cursor: default;
+}
+/* line 98, ../sass/styles.scss */
+.recipeListWrapper .recipeList .recipe:hover {
+  background: #ececec;
+}
+/* line 104, ../sass/styles.scss */
+.recipeListWrapper .recipeList .recipe .title {
+  font-size: 3vmin;
+  color: #000000;
+}
+/* line 109, ../sass/styles.scss */
+.recipeListWrapper .recipeList .recipe .tags {
+  display: flex;
+  flex-flow: row wrap;
+  margin-top: 0.1rem;
+  justify-content: flex-start;
+}
+/* line 116, ../sass/styles.scss */
+.recipeListWrapper .recipeList .recipe .tags .tag {
+  font-size: 0.8em;
+  margin-right: 1.4rem;
+}
+/* line 122, ../sass/styles.scss */
+.recipeListWrapper .recipeList .recipe .description {
+  color: #555555;
+  font-size: 1.8vmin;
+  margin-top: 1vmin;
+  letter-spacing: 0.02em;
+  line-height: 1.3em;
+}
+/* line 136, ../sass/styles.scss */
+.recipeListWrapper .recipeListEnd {
+  width: 100%;
+  padding: 2rem 10%;
+  box-sizing: border-box;
+  height: 10rem;
+  text-align: center;
+  color: #555555;
+}
+/* line 144, ../sass/styles.scss */
+.recipeListWrapper .recipeListEnd hr {
+  height: 0;
+  border: solid 1px #8e8e8e;
+  border-width: 1px 0 0 0;
+}
+
+/* line 153, ../sass/styles.scss */
+footer {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  height: 10rem;
+  background: #8e8e8e;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 0.8rem 1rem;
+  box-sizing: border-box;
+}
+/* line 164, ../sass/styles.scss */
+footer .copyright {
+  color: #555555;
+}
+
+/* line 169, ../sass/styles.scss */
+.recipeViewer {
+  width: 100vw;
+  height: 100vh;
+  background: #ffffff;
+  transform: translate(100vw);
+  transition: all 0.5s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: -2px -2px 6px rgba(0, 0, 0, 0.15);
+  padding: 3vmin;
+  box-sizing: border-box;
+}
+/* line 182, ../sass/styles.scss */
+.recipeViewer p {
+  margin: 0;
+}
+/* line 186, ../sass/styles.scss */
+.recipeViewer.showRecipeViewer {
+  transform: translate(0);
+}
+/* line 190, ../sass/styles.scss */
+.recipeViewer #title {
+  display: flex;
+}
+/* line 193, ../sass/styles.scss */
+.recipeViewer #title p {
+  font-size: 3em;
+  font-weight: bold;
+  color: #000000;
+}
+/* line 199, ../sass/styles.scss */
+.recipeViewer #title .escape {
+  width: 3em;
+  height: 3em;
+  margin: 0.6em 1.8em 0 0;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center center;
+  background-image: url(../img/arrow.svg);
+  cursor: pointer;
+}
+/* line 211, ../sass/styles.scss */
+.recipeViewer .authorSource {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding-right: 2vmin;
+  margin-top: 1rem;
+}
+/* line 219, ../sass/styles.scss */
+.recipeViewer .authorSource #author {
+  color: #8e8e8e;
+}
+/* line 222, ../sass/styles.scss */
+.recipeViewer .authorSource #author span {
+  color: #000000;
+}
+/* line 227, ../sass/styles.scss */
+.recipeViewer .authorSource #source {
+  cursor: pointer;
+}
+/* line 230, ../sass/styles.scss */
+.recipeViewer .authorSource #source a {
+  text-decoration: underline;
+  color: #62bd20;
+}
+/* line 237, ../sass/styles.scss */
+.recipeViewer #description {
+  font-size: 1.3em;
+  margin-top: 1em;
+  color: #555555;
+}
+/* line 243, ../sass/styles.scss */
+.recipeViewer #servings {
+  font-size: 1.3em;
+  margin-top: 1.3em;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 2vmin;
+}
+/* line 250, ../sass/styles.scss */
+.recipeViewer #servings input {
+  font-size: 1em;
+  outline: none;
+  border: none;
+  width: 2em;
+  text-align: center;
+  position: relative;
+  left: 0.2em;
+  background: transparent;
+}
+/* line 263, ../sass/styles.scss */
+.recipeViewer #oven {
+  display: flex;
+}
+/* line 266, ../sass/styles.scss */
+.recipeViewer #oven div {
+  width: 1.2em;
+  height: 1.2em;
+  margin: 0.05em 0.7em 0 0;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center center;
+  background-image: url(../img/oven.svg);
+}
+/* line 277, ../sass/styles.scss */
+.recipeViewer section.ingredients {
+  margin-top: 1em;
+}
