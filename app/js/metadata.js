@@ -182,7 +182,6 @@ getDirections = (recipe) => { // finds timer data in recipe instructions, then a
 
     if (matches && state.showTimers) { // if a time match is found at this step and timers are toggled on then add the timer
       for (m in matches) {
-        console.log(matches[m]);
         let exec = regex.exec(directions[d]);
 
         output.push(`
@@ -237,5 +236,4 @@ getTotalTime = (r) => {
   }
 
   return totalTime;
-  // console.log(r.directions.toString());
 }

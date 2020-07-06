@@ -22,8 +22,6 @@ let state = {
 $(document).ready(() => {
   console.log("ready");
 
-  
-
   init();
   
   
@@ -33,13 +31,14 @@ $(document).ready(() => {
   // hide recipe viewer on escape keypress
   $(document).keydown((e) => {
     if (e.keyCode == 27) {
-      $(".recipeViewer").removeClass('showRecipeViewer');
+      hideRecipe();
+      
     }
   });
 
   // hide recipe viewer on back button click
-  $(".recipeViewer #title div").click(() => {
-    $(".recipeViewer").removeClass('showRecipeViewer');
+  $(".recipeViewer #title div, .recipeViewerOverlay").click(() => {
+    hideRecipe();
   });
 
 
@@ -70,10 +69,9 @@ $(document).ready(() => {
   });
 
   // query recipe list while query is being entered
-  $("nav .search input").keyup(() => {
-    state.query = $("nav .search input").val();
+  $("nav .search input").keyup(function() {
+    state.query = $(this).val();
     populateRecipeList(state.recipes);
-    console.log(state.query);
   });
 
   $(".FOTime .toggle").click(function() {
@@ -111,6 +109,7 @@ $(document).ready(() => {
 
 // initialise the page
 init = () => {
+  $(".recipeViewerOverlay").hide();
   $("#date").text(getYear()); // set current year in footer
   $(".filterOptionsWrapper, #oven").hide(); // hide filter options initially
 
@@ -130,19 +129,20 @@ init = () => {
 viewRecipe = (recipes, id) => {
   let recipe = recipes.find(a => a.id == id);
 
-  console.log(recipe);
-
   if (id != state.activeRecipe) {
+    $(".recipeViewerOverlay").fadeIn();
     $(".recipeViewer").addClass('showRecipeViewer');
   } else {
     $(".recipeViewer #title p").text(recipe.title);
 
-    let tags = '';
-    let author = recipe.author;
+    console.log(getTags(recipe)[0]);
+
+    $(".recipeViewerOverlay").fadeIn();
 
 
-    $(".recipeViewer tags").empty();
-    $(".recipeViewer tags").append(getTags(recipe)[0]);
+
+    $(".recipeViewer #tags").empty();
+    $(".recipeViewer #tags").append(getTags(recipe)[0].toString().replace(/[\,\"\']/g, ''));
 
     $(".recipeViewer #title p").text(recipe.title);
     $(".recipeViewer #author span").text(recipe.author.name);
@@ -152,10 +152,7 @@ viewRecipe = (recipes, id) => {
     state.servings = recipe.servings;
     $(".recipeViewer #servings input").val(state.servings);
 
-    console.log(getOven(recipe));
-
     if (getOven(recipe).length > 1) {
-      console.log("oven");
       $(".recipeViewer #oven p").text(getOven(recipe));
       $(".recipeViewer #oven").show();
     } else {
@@ -195,7 +192,6 @@ populateRecipeList = (recipes) => {
   $(".recipeList").empty(); // clear the recipe list
 
   let allTags = state.filters.tags.data;
-  console.log('All tags', allTags);
 
   let filteredRecipes = recipes.filter((r) => { // apply filters
     let temp = true;
@@ -209,26 +205,15 @@ populateRecipeList = (recipes) => {
     if (state.filters.tags.enabled) { // run tag filter if enabled
       
       let tags = getTags(r)[1];
-      console.log('filtered tags', tags);
 
       let tagIncluded = tags.filter(t => {
         return allTags.includes(t);
       });
 
-      console.log(tagIncluded);
-
       temp = temp && (tagIncluded.length > 0);
     }
 
     return temp;
-
-    // get tags
-    // get all tags
-    // if all filters are disabled the return true
-    // if tags overlaps alltags then return true
-    // if time filter is satisfied then return true
-    // else return false
-    //
   });
 
   let queriedRecipes = filteredRecipes.filter((r) => { // apply search query
@@ -242,29 +227,15 @@ populateRecipeList = (recipes) => {
   }
   for (let i = 0; i < queriedRecipes.length; i++) {
     let html = '';
-    let tags = '';
-
-    // for (tag in getTags(recipes[i])) { // create html string for recipe tags
-    //   tags += `<div class="tag">${recipes[i].tags[tag]}</div>`;
-    // }
-
-    let charsToReplace = /[\,\"\']/g
 
     html += `<div class="recipe ${queriedRecipes[i].title == 'sentinel' ? 'sentinel' : ''}" data-index="${queriedRecipes[i].id}">
       <div class="title">${queriedRecipes[i].title}</div>
-      <div class="tags">${getTags(queriedRecipes[i])[0].toString().replace(charsToReplace, "")}</div>
+      <div class="tags">${getTags(queriedRecipes[i])[0].toString().replace(/[\,\"\']/g, "")}</div>
       <div class="description">${queriedRecipes[i].description}</div>
     </div>`;
 
-    console.log(getTags(queriedRecipes[i]));
-
     $(".recipeList").append(html);
   }
-
-  // $(".recipeList .tags").each(function() {
-  //   console.log($(this));
-  //   $(this).css("color", rgbVariation(PRIMARY, 50, false));
-  // });
 
   $(".recipeList .recipe").click(function() {
     state.activeRecipe = parseInt($(this).data('index'));
@@ -354,5 +325,10 @@ updateToggles = () => {
     $(".FOTime .toggle .ball").removeClass("enabled");
     $(".slider").addClass("disabled");
   }
+}
+
+hideRecipe = () => {
+  $(".recipeViewer").removeClass('showRecipeViewer');
+  $(".recipeViewerOverlay").fadeOut(100);
 }
 

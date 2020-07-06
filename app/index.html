@@ -58,28 +58,30 @@
         </div>
       </footer>
     </div>
-    <div class="recipeViewer">
-      <section id="title"><div class="escape"></div><p>Title Placeholder</p></section>
-      <section id="tags">Tags</section>
-      <div class="authorSource">
-        <section id="author">By <span>Author</span></section>
-        <section id="source"><a>View original recipe</a></section>
+    <!-- <div class="recipeViewerOverlay"> -->
+      <div class="recipeViewer">
+        <section id="title"><div class="escape"></div><p>Title Placeholder</p></section>
+        <section id="tags">Tags</section>
+        <div class="authorSource">
+          <section id="author">By <span>Author</span></section>
+          <section id="source"><a>View original recipe</a></section>
+        </div>
+        <section id="description">desscription</section>
+        <section id="servings">
+          <p>
+            This will serve 
+            <input type="number" id="points" name="points" step="1" value="1" size="1" min="1" max="99">
+            people.
+          </p>
+          <div id="oven"><div></div><p></p>
+        </section>
+        <section class="ingredients">ingredients</section>
+        <section id="directions">directions</section>
+        <!-- <div class="ingredients">
+          <div class="tab"></div>
+          <div class="content"></div>
+        </div> -->
       </div>
-      <section id="description">desscription</section>
-      <section id="servings">
-        <p>
-          This will serve 
-          <input type="number" id="points" name="points" step="1" value="1" size="1" min="1" max="99">
-          people.
-        </p>
-        <div id="oven"><div></div><p></p>
-      </section>
-      <section class="ingredients">ingredients</section>
-      <section id="directions">directions</section>
-      <!-- <div class="ingredients">
-        <div class="tab"></div>
-        <div class="content"></div>
-      </div> -->
-    </div>
+    <!-- </div> -->
   </body>
 </html>

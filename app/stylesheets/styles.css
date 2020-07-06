@@ -415,40 +415,75 @@ footer .copyright {
   color: #555555;
 }
 
-/* line 407, ../sass/styles.scss */
+/* line 406, ../sass/styles.scss */
+.recipeViewerOverlay {
+  width: 110vw;
+  height: 110vh;
+  background: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: -5vh;
+  top: -5vw;
+  z-index: 200;
+}
+
+/* line 416, ../sass/styles.scss */
 .recipeViewer {
   width: 100vw;
+  max-width: 1080px;
   height: 100vh;
+  overflow: hidden scroll;
   background: #ffffff;
   transform: translate(100vw);
   transition: all 0.5s ease;
   position: fixed;
   top: 0;
-  left: 0;
+  right: 0;
   box-shadow: -2px -2px 6px rgba(0, 0, 0, 0.15);
-  padding: 3vmin;
+  padding: 3vmin 3vmin 0 3vmin;
   box-sizing: border-box;
-  z-index: 1000;
+  z-index: 201;
+  /* width */
+  /* Track */
+  /* Handle */
+  /* Handle on hover */
 }
-/* line 421, ../sass/styles.scss */
+/* line 433, ../sass/styles.scss */
+.recipeViewer::-webkit-scrollbar {
+  width: 0px;
+}
+/* line 439, ../sass/styles.scss */
+.recipeViewer::-webkit-scrollbar-track {
+  background: transparent;
+}
+/* line 444, ../sass/styles.scss */
+.recipeViewer::-webkit-scrollbar-thumb {
+  background: #62bd20;
+  border-radius: 5px;
+  opacity: 0.6;
+}
+/* line 451, ../sass/styles.scss */
+.recipeViewer::-webkit-scrollbar-thumb:hover {
+  background: #62e2a4;
+}
+/* line 455, ../sass/styles.scss */
 .recipeViewer p {
   margin: 0;
 }
-/* line 425, ../sass/styles.scss */
+/* line 459, ../sass/styles.scss */
 .recipeViewer.showRecipeViewer {
   transform: translate(0);
 }
-/* line 429, ../sass/styles.scss */
+/* line 463, ../sass/styles.scss */
 .recipeViewer #title {
   display: flex;
 }
-/* line 432, ../sass/styles.scss */
+/* line 466, ../sass/styles.scss */
 .recipeViewer #title p {
   font-size: 3em;
   font-weight: bold;
   color: #000000;
 }
-/* line 438, ../sass/styles.scss */
+/* line 472, ../sass/styles.scss */
 .recipeViewer #title .escape {
   width: 3em;
   height: 3em;
@@ -459,11 +494,19 @@ footer .copyright {
   background-image: url(../img/arrow.svg);
   cursor: pointer;
 }
-/* line 450, ../sass/styles.scss */
+/* line 484, ../sass/styles.scss */
 .recipeViewer #tags {
   margin-top: 1em;
+  display: flex;
+  width: 50%;
+  flex-flow: row wrap;
+  justify-content: flex-start;
 }
-/* line 454, ../sass/styles.scss */
+/* line 491, ../sass/styles.scss */
+.recipeViewer #tags .tag {
+  margin-right: 2em;
+}
+/* line 496, ../sass/styles.scss */
 .recipeViewer .authorSource {
   display: flex;
   flex-flow: row nowrap;
@@ -472,30 +515,30 @@ footer .copyright {
   padding-right: 2vmin;
   margin-top: 1rem;
 }
-/* line 462, ../sass/styles.scss */
+/* line 504, ../sass/styles.scss */
 .recipeViewer .authorSource #author {
   color: #8e8e8e;
 }
-/* line 465, ../sass/styles.scss */
+/* line 507, ../sass/styles.scss */
 .recipeViewer .authorSource #author span {
   color: #000000;
 }
-/* line 470, ../sass/styles.scss */
+/* line 512, ../sass/styles.scss */
 .recipeViewer .authorSource #source {
   cursor: pointer;
 }
-/* line 473, ../sass/styles.scss */
+/* line 515, ../sass/styles.scss */
 .recipeViewer .authorSource #source a {
   text-decoration: underline;
   color: #62bd20;
 }
-/* line 480, ../sass/styles.scss */
+/* line 522, ../sass/styles.scss */
 .recipeViewer #description {
   font-size: 1.3em;
   margin-top: 1em;
   color: #555555;
 }
-/* line 486, ../sass/styles.scss */
+/* line 528, ../sass/styles.scss */
 .recipeViewer #servings {
   font-size: 1.3em;
   margin-top: 1.3em;
@@ -503,7 +546,7 @@ footer .copyright {
   justify-content: space-between;
   padding-right: 2vmin;
 }
-/* line 493, ../sass/styles.scss */
+/* line 535, ../sass/styles.scss */
 .recipeViewer #servings input {
   font-size: 1em;
   outline: none;
@@ -514,11 +557,11 @@ footer .copyright {
   left: 0.2em;
   background: transparent;
 }
-/* line 506, ../sass/styles.scss */
+/* line 548, ../sass/styles.scss */
 .recipeViewer #oven {
   display: flex;
 }
-/* line 509, ../sass/styles.scss */
+/* line 551, ../sass/styles.scss */
 .recipeViewer #oven div {
   width: 1.2em;
   height: 1.2em;
@@ -528,26 +571,26 @@ footer .copyright {
   background-position: center center;
   background-image: url(../img/oven.svg);
 }
-/* line 520, ../sass/styles.scss */
+/* line 562, ../sass/styles.scss */
 .recipeViewer section.ingredients {
   margin-top: 1em;
 }
-/* line 524, ../sass/styles.scss */
+/* line 566, ../sass/styles.scss */
 .recipeViewer #directions {
   margin-top: 1em;
 }
-/* line 527, ../sass/styles.scss */
+/* line 569, ../sass/styles.scss */
 .recipeViewer #directions .directionBreak {
   margin: 1em 0;
 }
-/* line 531, ../sass/styles.scss */
+/* line 573, ../sass/styles.scss */
 .recipeViewer #directions .direction {
   margin-bottom: 1em;
 }
-/* line 547, ../sass/styles.scss */
+/* line 589, ../sass/styles.scss */
 .recipeViewer #directions .timer {
   margin-bottom: 1em;
-  width: 103%;
+  width: 105%;
   height: 4rem;
   background: #62bd20;
   margin: 0 -3vmin;
@@ -556,17 +599,17 @@ footer .copyright {
   align-items: center;
   cursor: pointer;
 }
-/* line 558, ../sass/styles.scss */
+/* line 600, ../sass/styles.scss */
 .recipeViewer #directions .timer:hover {
   opacity: 0.9;
 }
-/* line 562, ../sass/styles.scss */
+/* line 604, ../sass/styles.scss */
 .recipeViewer #directions .timer .time {
   padding: 0 0 0 3vmin;
   color: #ffffff;
   font-size: 2em;
 }
-/* line 568, ../sass/styles.scss */
+/* line 610, ../sass/styles.scss */
 .recipeViewer #directions .timer .control {
   padding: 0 3vmin 0 0;
   width: 4rem;

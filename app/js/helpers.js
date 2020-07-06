@@ -28,7 +28,6 @@ biasedRGB = (alpha, bias) => {
 }
 
 rgbVariation = (colour, tolerance, absolute) => {
-  console.log(colour, tolerance, absolute);
 // returns a variation on a given colour. The severity of the variation is defined by the 
 // 'tolerance' parameter. This varies each component of the rgb string by a random number within the range of half the tolerance.
 // if the 'absolute' parameter is true, each component of the rgb string will be varied by EXACTLY the provided tolerance.
