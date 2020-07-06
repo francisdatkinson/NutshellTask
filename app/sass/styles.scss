@@ -334,6 +334,7 @@ nav {
       &.sentinel {
         opacity: 0;
         cursor: default;
+        pointer-events: none;
       }
   
       &:hover {
@@ -366,10 +367,6 @@ nav {
         margin-top: 1vmin;
         letter-spacing: 0.02em;
         line-height: 1.3em;
-      }
-  
-      & .tags {
-  
       }
     }
   }
@@ -447,7 +444,11 @@ footer {
       background-position: center center;
       background-image: url(../img/arrow.svg);
       cursor: pointer;
-;    }
+    }
+  }
+
+  & #tags {
+    margin-top: 1em;
   }
 
   & .authorSource {

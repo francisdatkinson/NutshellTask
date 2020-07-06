@@ -95,10 +95,12 @@ $(document).ready(() => {
   });
 
   $(".FOTag .tag").click(function() {
-    if (state.filters.tags.data.includes($(this).text())) {
-      $(this).css({"background": rgbVariation(PRIMARY, 20, false), "color": WHITE});
-    } else {
+    if (state.filters.tags.data.includes($(this).data("tag"))) {
       $(this).css({"background": "transparent", "color": STEXT});
+      state.filters.tags.data.splice(state.filters.tags.data.indexOf($(this).data("tag")), 1);
+    } else {
+      $(this).css({"background": rgbVariation(PRIMARY, 20, false), "color": WHITE});
+      state.filters.tags.data.push($(this).data("tag"));
     }
     
     populateRecipeList(state.recipes);
@@ -192,12 +194,41 @@ updateIngredients = (recipe) => {
 populateRecipeList = (recipes) => {
   $(".recipeList").empty(); // clear the recipe list
 
+  let allTags = state.filters.tags.data;
+  console.log('All tags', allTags);
+
   let filteredRecipes = recipes.filter((r) => { // apply filters
-    let totalTime = getTotalTime(r);
-    if (!state.filters.time.enabled) {
+    let temp = true;
+    if (!state.filters.time.enabled && !state.filters.tags.enabled) { // return true if all filters are disabled
       return true;
     }
-    return (totalTime < state.filters.time.data || state.filters.time.data == 7200);
+    if (state.filters.time.enabled) { // run time filter if enabled
+      let totalTime = getTotalTime(r);
+      temp = (totalTime < state.filters.time.data || state.filters.time.data == 7200);
+    }
+    if (state.filters.tags.enabled) { // run tag filter if enabled
+      
+      let tags = getTags(r)[1];
+      console.log('filtered tags', tags);
+
+      let tagIncluded = tags.filter(t => {
+        return allTags.includes(t);
+      });
+
+      console.log(tagIncluded);
+
+      temp = temp && (tagIncluded.length > 0);
+    }
+
+    return temp;
+
+    // get tags
+    // get all tags
+    // if all filters are disabled the return true
+    // if tags overlaps alltags then return true
+    // if time filter is satisfied then return true
+    // else return false
+    //
   });
 
   let queriedRecipes = filteredRecipes.filter((r) => { // apply search query
@@ -217,11 +248,15 @@ populateRecipeList = (recipes) => {
     //   tags += `<div class="tag">${recipes[i].tags[tag]}</div>`;
     // }
 
+    let charsToReplace = /[\,\"\']/g
+
     html += `<div class="recipe ${queriedRecipes[i].title == 'sentinel' ? 'sentinel' : ''}" data-index="${queriedRecipes[i].id}">
       <div class="title">${queriedRecipes[i].title}</div>
-      <div class="tags">${getTags(queriedRecipes[i])[0]}</div>
+      <div class="tags">${getTags(queriedRecipes[i])[0].toString().replace(charsToReplace, "")}</div>
       <div class="description">${queriedRecipes[i].description}</div>
-    </div>`
+    </div>`;
+
+    console.log(getTags(queriedRecipes[i]));
 
     $(".recipeList").append(html);
   }
@@ -272,7 +307,7 @@ getTags = (recipe) => {
     tags.push(recipe.tags[t]);
   }
 
-  return output, tags;
+  return [output, tags];
 }
 
 updateBubble = (value) => {
@@ -295,21 +330,12 @@ addFilterTags = (recipes) => {
   let output = [];
   for (t in tags) {
     output.push(`
-      <div class="tag" data-tag="${tags[t]}">${tags[t]}</div>
+      <div class="tag disabled" data-tag="${tags[t]}">${tags[t]}</div>
     `);
   }
   
   $(".FOTag .tags").empty();
   $(".FOTag .tags").append(output);
-
-  $(".FOTag .tag").click(function() {
-    if (state.filters.tags.data.includes($(this).data("tag"))) {
-      state.filters.tags.data.splice(state.filters.tags.data.indexOf($(this).data("tag")), 1);
-    } else {
-      state.filters.tags.data.push($(this).data("tag"));
-    }
-    console.log(state.filters.tags.data);
-  });
 }
 
 updateToggles = () => {

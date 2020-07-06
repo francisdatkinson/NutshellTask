@@ -351,29 +351,30 @@ nav .search input:focus {
 .recipeListWrapper .recipeList .recipe.sentinel {
   opacity: 0;
   cursor: default;
+  pointer-events: none;
 }
-/* line 339, ../sass/styles.scss */
+/* line 340, ../sass/styles.scss */
 .recipeListWrapper .recipeList .recipe:hover {
   background: #fafafa;
 }
-/* line 345, ../sass/styles.scss */
+/* line 346, ../sass/styles.scss */
 .recipeListWrapper .recipeList .recipe .title {
   font-size: 3vmin;
   color: #000000;
 }
-/* line 350, ../sass/styles.scss */
+/* line 351, ../sass/styles.scss */
 .recipeListWrapper .recipeList .recipe .tags {
   display: flex;
   flex-flow: row wrap;
   margin-top: 0.1rem;
   justify-content: flex-start;
 }
-/* line 357, ../sass/styles.scss */
+/* line 358, ../sass/styles.scss */
 .recipeListWrapper .recipeList .recipe .tags .tag {
   font-size: 0.8em;
   margin-right: 1.4rem;
 }
-/* line 363, ../sass/styles.scss */
+/* line 364, ../sass/styles.scss */
 .recipeListWrapper .recipeList .recipe .description {
   color: #555555;
   font-size: 1.8vmin;
@@ -381,7 +382,7 @@ nav .search input:focus {
   letter-spacing: 0.02em;
   line-height: 1.3em;
 }
-/* line 377, ../sass/styles.scss */
+/* line 374, ../sass/styles.scss */
 .recipeListWrapper .recipeListEnd {
   width: 100%;
   padding: 2rem 10%;
@@ -390,14 +391,14 @@ nav .search input:focus {
   text-align: center;
   color: #555555;
 }
-/* line 385, ../sass/styles.scss */
+/* line 382, ../sass/styles.scss */
 .recipeListWrapper .recipeListEnd hr {
   height: 0;
   border: solid 1px #8e8e8e;
   border-width: 1px 0 0 0;
 }
 
-/* line 394, ../sass/styles.scss */
+/* line 391, ../sass/styles.scss */
 footer {
   width: 100%;
   display: flex;
@@ -409,12 +410,12 @@ footer {
   padding: 0.8rem 1rem;
   box-sizing: border-box;
 }
-/* line 405, ../sass/styles.scss */
+/* line 402, ../sass/styles.scss */
 footer .copyright {
   color: #555555;
 }
 
-/* line 410, ../sass/styles.scss */
+/* line 407, ../sass/styles.scss */
 .recipeViewer {
   width: 100vw;
   height: 100vh;
@@ -429,25 +430,25 @@ footer .copyright {
   box-sizing: border-box;
   z-index: 1000;
 }
-/* line 424, ../sass/styles.scss */
+/* line 421, ../sass/styles.scss */
 .recipeViewer p {
   margin: 0;
 }
-/* line 428, ../sass/styles.scss */
+/* line 425, ../sass/styles.scss */
 .recipeViewer.showRecipeViewer {
   transform: translate(0);
 }
-/* line 432, ../sass/styles.scss */
+/* line 429, ../sass/styles.scss */
 .recipeViewer #title {
   display: flex;
 }
-/* line 435, ../sass/styles.scss */
+/* line 432, ../sass/styles.scss */
 .recipeViewer #title p {
   font-size: 3em;
   font-weight: bold;
   color: #000000;
 }
-/* line 441, ../sass/styles.scss */
+/* line 438, ../sass/styles.scss */
 .recipeViewer #title .escape {
   width: 3em;
   height: 3em;
@@ -458,7 +459,11 @@ footer .copyright {
   background-image: url(../img/arrow.svg);
   cursor: pointer;
 }
-/* line 453, ../sass/styles.scss */
+/* line 450, ../sass/styles.scss */
+.recipeViewer #tags {
+  margin-top: 1em;
+}
+/* line 454, ../sass/styles.scss */
 .recipeViewer .authorSource {
   display: flex;
   flex-flow: row nowrap;
@@ -467,30 +472,30 @@ footer .copyright {
   padding-right: 2vmin;
   margin-top: 1rem;
 }
-/* line 461, ../sass/styles.scss */
+/* line 462, ../sass/styles.scss */
 .recipeViewer .authorSource #author {
   color: #8e8e8e;
 }
-/* line 464, ../sass/styles.scss */
+/* line 465, ../sass/styles.scss */
 .recipeViewer .authorSource #author span {
   color: #000000;
 }
-/* line 469, ../sass/styles.scss */
+/* line 470, ../sass/styles.scss */
 .recipeViewer .authorSource #source {
   cursor: pointer;
 }
-/* line 472, ../sass/styles.scss */
+/* line 473, ../sass/styles.scss */
 .recipeViewer .authorSource #source a {
   text-decoration: underline;
   color: #62bd20;
 }
-/* line 479, ../sass/styles.scss */
+/* line 480, ../sass/styles.scss */
 .recipeViewer #description {
   font-size: 1.3em;
   margin-top: 1em;
   color: #555555;
 }
-/* line 485, ../sass/styles.scss */
+/* line 486, ../sass/styles.scss */
 .recipeViewer #servings {
   font-size: 1.3em;
   margin-top: 1.3em;
@@ -498,7 +503,7 @@ footer .copyright {
   justify-content: space-between;
   padding-right: 2vmin;
 }
-/* line 492, ../sass/styles.scss */
+/* line 493, ../sass/styles.scss */
 .recipeViewer #servings input {
   font-size: 1em;
   outline: none;
@@ -509,11 +514,11 @@ footer .copyright {
   left: 0.2em;
   background: transparent;
 }
-/* line 505, ../sass/styles.scss */
+/* line 506, ../sass/styles.scss */
 .recipeViewer #oven {
   display: flex;
 }
-/* line 508, ../sass/styles.scss */
+/* line 509, ../sass/styles.scss */
 .recipeViewer #oven div {
   width: 1.2em;
   height: 1.2em;
