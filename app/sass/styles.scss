@@ -149,9 +149,11 @@ nav {
             background: $secondary;
             border-radius: 1.5rem;
             left: 0.5rem;
+            transition: all 0.1s ease;
 
-            & .active {
+            &.enabled {
               background: $primary;
+              left: 1.5rem;
             }
           }
         }
@@ -198,6 +200,20 @@ nav {
             &:hover {
               opacity: 1; /* Fully shown on mouse-over */
             }
+
+            &.disabled {
+              pointer-events: none;
+
+              &::-webkit-slider-thumb {
+                -webkit-appearance: none; /* Override default look */
+                appearance: none;
+                width: 25px; /* Set a specific slider handle width */
+                height: 4rem; /* Slider handle height */
+                background: $faded; /* Green background */
+                
+                cursor: default; /* Cursor on hover */
+              }
+            }
   
             /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
             &::-webkit-slider-thumb {
@@ -222,18 +238,32 @@ nav {
           
         }
 
-        & .FOTag {
-          justify-content: space-around;
-          & .tag {
+        &.FOTag {
+          & .tags {
+            width: 100vw;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            flex: 1;
+            flex-flow: row nowrap;
 
-            &:hover {
-              background: $subtleHover;
+            & .tag {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              flex: 1;
+              height: 4rem;
+
+              &.disabled {
+                filter: saturate(0%);
+                opacity: 0.5;
+                pointer-events: none;
+              }
+  
+              &:hover {
+                background: $subtleHover;
+              }
             }
           }
+          
+          
         }
       }
 
@@ -288,6 +318,7 @@ nav {
     max-width: 1080px;
   
     & .recipe {
+      position: relative;
       flex-basis: 48%;
       height: 15em;
       max-height: 15em;
@@ -297,7 +328,6 @@ nav {
       box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
       margin-bottom: 1rem;
       overflow: hidden;
-      border-radius: 0.2rem;
       transition: all 0.2s ease;
       cursor: pointer;
   

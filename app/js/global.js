@@ -13,7 +13,7 @@ let state = {
     },
     time: {
       enabled: false,
-      data: 1000
+      data: 7200
     }
   },
   filtersVisible: false
@@ -76,20 +76,50 @@ $(document).ready(() => {
     console.log(state.query);
   });
 
+  $(".FOTime .toggle").click(function() {
+    state.filters.time.enabled = !state.filters.time.enabled;
+    updateToggles();
+    populateRecipeList(state.recipes);
+  });
+
+  $(".FOTag .toggle").click(function() {
+    state.filters.tags.enabled = !state.filters.tags.enabled;
+    if (state.filters.tags.enabled) {
+      $(".FOTaf .tag").removeClass("disabled");
+    } else {
+      $(".FOTaf .tag").addClass("disabled");
+    }
+    
+    updateToggles();
+    populateRecipeList(state.recipes);
+  });
+
+  $(".FOTag .tag").click(function() {
+    if (state.filters.tags.data.includes($(this).text())) {
+      $(this).css({"background": rgbVariation(PRIMARY, 20, false), "color": WHITE});
+    } else {
+      $(this).css({"background": "transparent", "color": STEXT});
+    }
+    
+    populateRecipeList(state.recipes);
+  });
+
   //////////////////////////////////////////////////////////////
 });
 
 // initialise the page
 init = () => {
   $("#date").text(getYear()); // set current year in footer
-  $(".filterOptionsWrapper").hide(); // hide filter options initially
+  $(".filterOptionsWrapper, #oven").hide(); // hide filter options initially
 
   // get recipes from a list of JSON files
   let urls = ['banana-oatmeal-cookie', 'basil-and-pesto-hummus', 'black-bean-and-rice-enchiladas', 'divine-hard-boiled-eggs', 'four-cheese-margherita-pizza', 'homemade-black-bean-veggie-burgers', 'homemade-chicken-enchiladas', 'marinated-grilled-shrimp', 'vegetable-fried-rice', 'vegetarian-korma', 'worlds-best-lasagna'];
   state.recipes = getRecipes(urls);
 
+  updateToggles();
   populateRecipeList(state.recipes); // populate recipe list with recipes
   addFilterTags(state.recipes); // add tags to filter section
+  
 
   console.log('Recipes', state.recipes);
 }
@@ -103,7 +133,7 @@ viewRecipe = (recipes, id) => {
   if (id != state.activeRecipe) {
     $(".recipeViewer").addClass('showRecipeViewer');
   } else {
-    $(".recipeViewer #title").text(recipe.title);
+    $(".recipeViewer #title p").text(recipe.title);
 
     let tags = '';
     let author = recipe.author;
@@ -119,8 +149,17 @@ viewRecipe = (recipes, id) => {
     $(".recipeViewer #description").text(recipe.description);
     state.servings = recipe.servings;
     $(".recipeViewer #servings input").val(state.servings);
-    $(".recipeViewer #oven p").text(getOven(recipe));
-    $(".recipeViewer #oven div").show();
+
+    console.log(getOven(recipe));
+
+    if (getOven(recipe).length > 1) {
+      console.log("oven");
+      $(".recipeViewer #oven p").text(getOven(recipe));
+      $(".recipeViewer #oven").show();
+    } else {
+      $(".recipeViewer #oven").hide();
+    }
+    
     $(".recipeViewer .ingredients, .recipeViewer .ingredients .content").text(recipe.ingredients);
 
     updateIngredients(recipe);
@@ -155,8 +194,10 @@ populateRecipeList = (recipes) => {
 
   let filteredRecipes = recipes.filter((r) => { // apply filters
     let totalTime = getTotalTime(r);
-    console.log(totalTime);
-    return totalTime < state.filters.time.data || state.filters.time.data == 7200;
+    if (!state.filters.time.enabled) {
+      return true;
+    }
+    return (totalTime < state.filters.time.data || state.filters.time.data == 7200);
   });
 
   let queriedRecipes = filteredRecipes.filter((r) => { // apply search query
@@ -185,13 +226,14 @@ populateRecipeList = (recipes) => {
     $(".recipeList").append(html);
   }
 
-  $(".tag").each(function() {
-    $(this).css("color", rgbVariation(PRIMARY, 50, false));
-  });
+  // $(".recipeList .tags").each(function() {
+  //   console.log($(this));
+  //   $(this).css("color", rgbVariation(PRIMARY, 50, false));
+  // });
 
-  $(".recipeList .recipe").click(() => {
-    let index = $(this).data("index");
-    viewRecipe(recipes, parseInt(index));
+  $(".recipeList .recipe").click(function() {
+    state.activeRecipe = parseInt($(this).data('index'));
+    viewRecipe(recipes, state.activeRecipe);
   });
 }
 
@@ -257,18 +299,34 @@ addFilterTags = (recipes) => {
     `);
   }
   
-  $(".FOTag").empty();
-  $(".FOTag").append(output);
+  $(".FOTag .tags").empty();
+  $(".FOTag .tags").append(output);
 
   $(".FOTag .tag").click(function() {
-    console.log($(this));
-    if (state.filters.tags.data.includes($(this).attr("tag"))) {
-      state.filters.tags.data.splice(state.filters.tags.data.indexOf($(this).attr("tag")), 1);
+    if (state.filters.tags.data.includes($(this).data("tag"))) {
+      state.filters.tags.data.splice(state.filters.tags.data.indexOf($(this).data("tag")), 1);
     } else {
-      state.filters.tags.data.push($(this).attr("tag"));
+      state.filters.tags.data.push($(this).data("tag"));
     }
     console.log(state.filters.tags.data);
   });
-  
+}
+
+updateToggles = () => {
+  if (state.filters.tags.enabled) {
+    $(".FOTag .toggle .ball").addClass("enabled");
+    $(".FOTag .tag").removeClass("disabled");
+  } else {
+    $(".FOTag .toggle .ball").removeClass("enabled");
+    $(".FOTag .tag").addClass("disabled");
+  }
+
+  if (state.filters.time.enabled) {
+    $(".FOTime .toggle .ball").addClass("enabled");
+    $(".slider").removeClass("disabled");
+  } else {
+    $(".FOTime .toggle .ball").removeClass("enabled");
+    $(".slider").addClass("disabled");
+  }
 }
 

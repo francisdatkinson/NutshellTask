@@ -3,6 +3,7 @@
   <head>
     <title>Recipe Manager</title>
     <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="shortcut icon" type="image/png" href="favicon.png"/>
     <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
@@ -18,7 +19,11 @@
         <div class="filter"></div>
         <div class="filterOptionsWrapper">
             <div class="filterOption FOTag">
-              <div class="toggle"></div>
+              <div class="toggle">
+                <div class="track"></div>
+                <div class="ball"></div>
+              </div>
+              <div class="tags"></div>
             </div>
             <div class="filterOption FOTime">
               <div class="toggle">
@@ -26,7 +31,7 @@
                 <div class="ball"></div>
               </div>
               <p>5 mins</p>
-              <input type="range" min="300" max="7200" value="3720" class="slider"/>
+              <input type="range" min="300" max="7200" value="7200" class="slider disabled"/>
               <div class="value"></div>
               <p>2 hrs+</p>
             </div>
@@ -63,7 +68,7 @@
       <section id="servings">
         <p>
           This will serve 
-          <input type="number" id="points" name="points" step="1" value="0" size="1">
+          <input type="number" id="points" name="points" step="1" value="1" size="1" min="1" max="99">
           people.
         </p>
         <div id="oven"><div></div><p></p>

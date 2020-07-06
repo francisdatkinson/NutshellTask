@@ -29,8 +29,6 @@ getIngredients = (recipe) => {
         return a != "";
       });
 
-      console.log(filteredQuantityArray);
-
       for (q in filteredQuantityArray) {
         quantity += eval(filteredQuantityArray[q]);
       }
@@ -122,26 +120,26 @@ getOven = (recipe) => {
   return state.unit < 2 ? `${normaliseOven(value, denom)[state.unit]} ${UNITS[state.unit]}` : `${UNITS[state.unit]} ${normaliseOven(value, denom)[state.unit]}`;
 }
 
-normaliseOven = (value, denom) => {
+normaliseOven = (value, denom) => { // converts matched oven temperature to other measurements
   let c = 0;
   let f = 0;
   let gm = 0;
   
-  switch (denom) {
+  switch (denom) { // switch based on provided denomination
     case 'c':
       c = value;
-      f = Math.floor(((value * (1.8)) + 32) / 5) * 5;
-      gm = this.getGasMark(c);
+      f = Math.floor(((value * (1.8)) + 32) / 5) * 5; // convert from C to F
+      gm = this.getGasMark(c); // convert from C to GM
     break;
     case 'f':
       f = value;
-      c = Math.floor(((value - 32) / 1.8) / 5) * 5;
-      gm = this.getGasMark(c);
+      c = Math.floor(((value - 32) / 1.8) / 5) * 5; // convert from F to C
+      gm = this.getGasMark(c); // convert from F to GM
     break;
     case 'gm':
       gm = value;
-      c = this.getCFromGM(gm);
-      f = Math.floor(((c * (1.8)) + 32) / 5) * 5;
+      c = this.getCFromGM(gm); // convert from GM to C
+      f = Math.floor(((c * (1.8)) + 32) / 5) * 5; // convert from GM to F
     break;
     default:
       c = value;
@@ -150,16 +148,16 @@ normaliseOven = (value, denom) => {
     break;
   }
 
-  return [c, f, gm];
+  return [c, f, gm]; // return array of temperature in all denominations
 }
 
-getCFromGM = (gm) => {
+getCFromGM = (gm) => { // converts Gas Mark to Celsius
   return (
     Math.floor(((135 * (1 + (gm / 10))) - 15) / 5) * 5
   );
 }
 
-getGasMark = (tempInC) => {
+getGasMark = (tempInC) => { // converts from Celsius to Gas Mark
   if (tempInC < 135 || tempInC > 260) {
     return tempInC + "C";
   } else {
@@ -169,7 +167,7 @@ getGasMark = (tempInC) => {
   }
 }
 
-getDirections = (recipe) => {
+getDirections = (recipe) => { // finds timer data in recipe instructions, then adds timers in the recipe at the correct locations.
   let directions = recipe.directions;
   let output = [];
   const regex = /([^t-](?:(?:\d{1, 3}\s?-\s?\d+\s?)|(?:\d+\s?))(?:min|mins|hr|hrs|minute|minutes|hour|hours|second|seconds|sec|secs))/g; // matches most time values (e.g. 30 seconds, 2hrs, 1 min)
@@ -182,7 +180,7 @@ getDirections = (recipe) => {
       <div class="direction"><span class="firstChar">${parseInt(d) + 1}.</span> ${directions[d]}</div>
     `);
 
-    if (matches && state.showTimers) {
+    if (matches && state.showTimers) { // if a time match is found at this step and timers are toggled on then add the timer
       for (m in matches) {
         console.log(matches[m]);
         let exec = regex.exec(directions[d]);
