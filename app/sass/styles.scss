@@ -1,12 +1,290 @@
 @import "partials/variables";
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&display=swap');
 
 body {
-  background: $red;
+  background: $background;
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  border: 0;
+  user-select: none;
+  padding-top: 7rem;
 }
 
-.recipeList {
-  
-}
-.recipeList-recipe {
+nav {
+  height: 5rem;
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  top: 0;
   width: 100%;
+  background: $primary;
+  color: $white;
+  margin-bottom: 1rem;
+  box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+
+  & .logo {
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center center;
+    background-image: url(../img/logo.svg);
+    width: 12vmin;
+    height: 12vmin;
+    max-width: 6rem;
+    max-height: 6rem;
+    position: relative;
+    top: 1vmin;
+    left: 2vmin;
+    border-radius: 6vmin;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-image: url(../img/logoHover.svg);
+    }
+  }
+
+  & .search {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & input {
+      height: 1.5em;
+      padding: 0.2em;
+      border: none;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+}
+
+// header {
+//   margin-top: 5rem;
+// }
+.recipeListWrapper {
+  display: flex;
+  flex-flow: column;
+
+  & .recipeList {
+    display: flex;
+    flex-flow: row wrap;
+    margin: auto;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    max-width: 1080px;
+  
+    & .recipe {
+      flex-basis: 48%;
+      height: 15em;
+      max-height: 15em;
+      padding: 2vmin;
+      box-sizing: border-box;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+      margin-bottom: 1rem;
+      overflow: hidden;
+      border-radius: 0.2rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+  
+      &.sentinel {
+        opacity: 0;
+        cursor: default;
+      }
+  
+      &:hover {
+        background: $subtleHover;
+      }
+      
+      
+  
+      & .title {
+        font-size: 3vmin;
+        color: $pText;
+      }
+  
+      & .tags {
+        display: flex;
+        flex-flow: row wrap;
+        margin-top: 0.1rem;
+        justify-content: flex-start;
+        
+        
+        & .tag {
+          font-size: 0.8em;
+          margin-right: 1.4rem;
+        }
+      }
+  
+      & .description {
+        color: $sText;
+        font-size: 1.8vmin;
+        margin-top: 1vmin;
+        letter-spacing: 0.02em;
+        line-height: 1.3em;
+      }
+  
+      & .tags {
+  
+      }
+    }
+  }
+
+  & .recipeListEnd {
+    width: 100%;
+    padding: 2rem 10%;
+    box-sizing: border-box;
+    height: 10rem;
+    text-align: center;
+    color: $sText;
+
+    & hr {
+      height: 0;
+      border: solid 1px $faded;
+      border-width: 1px 0 0 0;
+    }
+  }
+}
+
+
+footer {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  height: 10rem;
+  background: $faded;
+  justify-content: flex-end;
+  align-items: flex-end;
+  padding: 0.8rem 1rem;
+  box-sizing: border-box;
+
+  & .copyright {
+    color: $sText;
+  }
+}
+
+.recipeViewer {
+  width: 100vw;
+  height: 100vh;
+  background: $white;
+  transform: translate(100vw);
+  transition: all 0.5s ease;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-shadow: -2px -2px 6px rgba(0,0,0,0.15);
+  padding: 3vmin;
+  box-sizing: border-box;
+
+  & p {
+    margin: 0;
+  }
+
+  &.showRecipeViewer {
+    transform: translate(0);
+  }
+
+  & #title {
+    display: flex;
+    
+    & p {
+      font-size: 3em;
+      font-weight: bold;
+      color: $pText;
+    }
+
+    & .escape {
+      width: 3em;
+      height: 3em;
+      margin: 0.6em 1.8em 0 0;
+      background-repeat: no-repeat;
+      background-size: 100%;
+      background-position: center center;
+      background-image: url(../img/arrow.svg);
+      cursor: pointer;
+;    }
+  }
+
+  & .authorSource {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    box-sizing: border-box;
+    padding-right: 2vmin;
+    margin-top: 1rem;
+
+    & #author {
+      color: $faded;
+
+      & span {
+        color: $pText;
+      }
+    }
+
+    & #source {
+      cursor: pointer;
+
+      & a {
+        text-decoration: underline;
+        color: $primary;
+      }
+    }
+  }
+
+  & #description {
+    font-size: 1.3em;
+    margin-top: 1em;
+    color: $sText;
+  }
+
+  & #servings {
+    font-size: 1.3em;
+    margin-top: 1.3em;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 2vmin;
+  
+    & input {
+      // width: 3em;
+      font-size: 1em;
+      outline: none;
+      border: none;
+      width: 2em;
+      text-align: center;
+      position: relative;
+      left: 0.2em;
+      background: transparent;
+    }
+  }
+
+  & #oven {
+    display: flex;
+
+    & div {
+      width: 1.2em;
+      height: 1.2em;
+      margin: 0.05em 0.7em 0 0;
+      background-repeat: no-repeat;
+      background-size: 100%;
+      background-position: center center;
+      background-image: url(../img/oven.svg);
+    }
+  }
+
+  & section.ingredients {
+    margin-top: 1em;
+  }
+
+  // & div.ingredients {
+  //   position: fixed;
+  //   right: -60%;
+  //   top: 0;
+  //   height: 100%;
+  //   width: 60%;
+  //   background: $faded;
+  //   transform: translateX(-3rem);
+  // }
 }
