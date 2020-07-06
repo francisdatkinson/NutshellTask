@@ -1,54 +1,104 @@
 let state = {
-  activeRecipe: 1,
+  recipes: [],
+  activeRecipe: 6,
   showTimers: false,
   unit: 1,
-  servings: 0
+  servings: 0,
+  showTimers: true,
+  query: '',
+  filters: {
+    tags: {
+      enabled: false,
+      data: []
+    },
+    time: {
+      enabled: false,
+      data: 1000
+    }
+  },
+  filtersVisible: false
 }
 
 $(document).ready(() => {
   console.log("ready");
 
-  let urls = ['banana-oatmeal-cookie', 'basil-and-pesto-hummus', 'black-bean-and-rice-enchiladas', 'divine-hard-boiled-eggs', 'four-cheese-margherita-pizza', 'homemade-black-bean-veggie-burgers', 'homemade-chicken-enchiladas', 'marinated-grilled-shrimp', 'vegetable-fried-rice', 'vegetarian-korma', 'worlds-best-lasagna'];
-  let recipes = [];
   
-  for (url in urls) {
-    loadJSON(`recipes/${urls[url]}.json`, response => {
-      recipes.push({id: recipes.length, ...JSON.parse(response)}); // push an id for a recipe, plus the JSON response containing the recipe data
-    });
-  }
+
+  init();
   
-  console.log(recipes);
-
-  populateRecipeList(recipes);
   
-  $("#date").text(getYear());
+ 
+  // add event listeners ///////////////////////////////////////
 
-  $(".recipeList .recipe").click(() => {
-    let index = $(this).data("index");
-    console.log(index);
-    viewRecipe(recipes, 1);
-  });
-
+  // hide recipe viewer on escape keypress
   $(document).keydown((e) => {
     if (e.keyCode == 27) {
       $(".recipeViewer").removeClass('showRecipeViewer');
     }
   });
 
-  $(".recipeViewer #servings input").change(() => {
-    state.servings = $(".recipeViewer #servings input").val();
-    updateIngredients(recipes[state.activeRecipe]);
-  });
-
+  // hide recipe viewer on back button click
   $(".recipeViewer #title div").click(() => {
     $(".recipeViewer").removeClass('showRecipeViewer');
   });
+
+
+  // update ingredient quantities based on user defined number of servings
+  $(".recipeViewer #servings input").change(() => {
+    state.servings = $(".recipeViewer #servings input").val(); 
+    updateIngredients(state.recipes[state.activeRecipe]);
+  });
+  
+  // show/hide filter options on recipe list
+  $(".filter").click(() => {
+    $(".filterOptionsWrapper").slideToggle(100);
+    
+    if (state.filtersVisible) {
+      $(".shift").removeClass("filterVisible");
+      state.filtersVisible = false;
+    } else {
+      $(".shift").addClass("filterVisible");
+      state.filtersVisible = true;
+    }
+  });
+
+  // filter recipes based on time slider
+  // ideally would be realtime updates
+  $(".slider").change(() => {
+    updateBubble($(".slider").val());
+    updateFilters({time: $(".slider").val()}, state.recipes);
+  });
+
+  // query recipe list while query is being entered
+  $("nav .search input").keyup(() => {
+    state.query = $("nav .search input").val();
+    populateRecipeList(state.recipes);
+    console.log(state.query);
+  });
+
+  //////////////////////////////////////////////////////////////
 });
 
-viewRecipe = (recipes, id) => {
-  console.log(id);
+// initialise the page
+init = () => {
+  $("#date").text(getYear()); // set current year in footer
+  $(".filterOptionsWrapper").hide(); // hide filter options initially
 
-  let recipe = recipes.find(a => a.id = id);
+  // get recipes from a list of JSON files
+  let urls = ['banana-oatmeal-cookie', 'basil-and-pesto-hummus', 'black-bean-and-rice-enchiladas', 'divine-hard-boiled-eggs', 'four-cheese-margherita-pizza', 'homemade-black-bean-veggie-burgers', 'homemade-chicken-enchiladas', 'marinated-grilled-shrimp', 'vegetable-fried-rice', 'vegetarian-korma', 'worlds-best-lasagna'];
+  state.recipes = getRecipes(urls);
+
+  populateRecipeList(state.recipes); // populate recipe list with recipes
+  addFilterTags(state.recipes); // add tags to filter section
+
+  console.log('Recipes', state.recipes);
+}
+
+
+viewRecipe = (recipes, id) => {
+  let recipe = recipes.find(a => a.id == id);
+
+  console.log(recipe);
 
   if (id != state.activeRecipe) {
     $(".recipeViewer").addClass('showRecipeViewer');
@@ -57,22 +107,14 @@ viewRecipe = (recipes, id) => {
 
     let tags = '';
     let author = recipe.author;
-    console.log(author);
 
-    for (tag in getTags(recipe)) {
-      tags += `<div class='tag'>${getTags(recipe)[tag]}</div>`
-    }
-
-    console.log(tags);
 
     $(".recipeViewer tags").empty();
-    $(".recipeViewer tags").append(tags);
+    $(".recipeViewer tags").append(getTags(recipe)[0]);
 
     $(".recipeViewer #title p").text(recipe.title);
     $(".recipeViewer #author span").text(recipe.author.name);
     $(".recipeViewer #source a").attr("href", recipe.author.url);
-
-    console.log(getOven(recipe));
 
     $(".recipeViewer #description").text(recipe.description);
     state.servings = recipe.servings;
@@ -83,7 +125,9 @@ viewRecipe = (recipes, id) => {
 
     updateIngredients(recipe);
 
-    $(".recipeViewer #directions").text(recipe.directions);
+    $(".recipeViewer #directions").empty();
+    $(".recipeViewer #directions").append(getDirections(recipe));
+
     $(".recipeViewer").addClass('showRecipeViewer');
 
     getIngredients(recipe);
@@ -98,7 +142,7 @@ updateIngredients = (recipe) => {
 
     for (i in ingredients) {
       output.push(
-        `<div class="ingredient">${ingredients[i].quantity * (state.servings / recipe.servings)} ${ingredients[i].ingredient}</div>`
+        `<div class="ingredient">${toFraction(ingredients[i].quantity * (state.servings / recipe.servings))} ${ingredients[i].ingredient}</div>`
       );
     }
 
@@ -109,29 +153,45 @@ updateIngredients = (recipe) => {
 populateRecipeList = (recipes) => {
   $(".recipeList").empty(); // clear the recipe list
 
-  if (recipes.length % 2 != 0) { // pads out the recipe list to ensure individual recipes on a line are left-aligned 
-    recipes.push({id:'-1', title: 'sentinel'});
+  let filteredRecipes = recipes.filter((r) => { // apply filters
+    let totalTime = getTotalTime(r);
+    console.log(totalTime);
+    return totalTime < state.filters.time.data || state.filters.time.data == 7200;
+  });
+
+  let queriedRecipes = filteredRecipes.filter((r) => { // apply search query
+    return r.title.toLowerCase().includes(state.query.toLowerCase()) || // search by title
+    r.description.toLowerCase().includes(state.query.toLowerCase()) || // search by title
+    r.author.name.toLowerCase().includes(state.query.toLowerCase()) // search by author
+  });
+
+  if (queriedRecipes.length % 2 != 0) { // pads out the recipe list to ensure individual recipes on a line are left-aligned 
+    queriedRecipes.push({id:'-1', title: 'sentinel'});
   }
-  for (let i = 0; i < recipes.length; i++) {
+  for (let i = 0; i < queriedRecipes.length; i++) {
     let html = '';
     let tags = '';
 
-    for (tag in getTags(recipes[i])) { // create html string for recipe tags
-      tags += `<div class="tag">${recipes[i].tags[tag]}</div>`;
-    }
+    // for (tag in getTags(recipes[i])) { // create html string for recipe tags
+    //   tags += `<div class="tag">${recipes[i].tags[tag]}</div>`;
+    // }
 
-    html += `<div class="recipe ${recipes[i].title == 'sentinel' ? 'sentinel' : ''}" data-index="${recipes[i].id}">
-      <div class="title">${recipes[i].title}</div>
-      <div class="tags">${tags}</div>
-      <div class="description">${recipes[i].description}</div>
+    html += `<div class="recipe ${queriedRecipes[i].title == 'sentinel' ? 'sentinel' : ''}" data-index="${queriedRecipes[i].id}">
+      <div class="title">${queriedRecipes[i].title}</div>
+      <div class="tags">${getTags(queriedRecipes[i])[0]}</div>
+      <div class="description">${queriedRecipes[i].description}</div>
     </div>`
 
     $(".recipeList").append(html);
   }
 
   $(".tag").each(function() {
-    console.log($(this).css("color"));
     $(this).css("color", rgbVariation(PRIMARY, 50, false));
+  });
+
+  $(".recipeList .recipe").click(() => {
+    let index = $(this).data("index");
+    viewRecipe(recipes, parseInt(index));
   });
 }
 
@@ -147,14 +207,68 @@ showRecipeViewer = (show) => {
   }
 }
 
-getTags = (recipe) => {
+getAllTags = (recipes) => {
   let tags = [];
-
-  for (tag in recipe.tags) {
-    tags.push(recipe.tags[tag]);
+  for (r in recipes) {
+    for (t in recipes[r].tags) {
+      if (!tags.includes(recipes[r].tags[t])) {
+        tags.push(recipes[r].tags[t]);
+      }
+    } 
   }
-
   return tags;
 }
 
+getTags = (recipe) => {
+  let output = [];
+  let tags = [];
+
+  for (t in recipe.tags) {
+    output.push(`
+      <div class="tag">${recipe.tags[t]}</div>
+    `);
+    tags.push(recipe.tags[t]);
+  }
+
+  return output, tags;
+}
+
+updateBubble = (value) => {
+  $(".value").text(getISO(value) == '02:00:00' ? '02:00:00+' : getISO(value));
+}
+
+updateFilters = (values, recipes) => { // takes an object of filter values and updates the respective filters
+  if (values.time) {
+    state.filters.time.data = parseInt(values.time);
+  }
+  if (values.tags) {
+    state.filters.tags.data = values.tags;
+  }
+
+  populateRecipeList(recipes);
+}
+
+addFilterTags = (recipes) => {
+  let tags = getAllTags(recipes);
+  let output = [];
+  for (t in tags) {
+    output.push(`
+      <div class="tag" data-tag="${tags[t]}">${tags[t]}</div>
+    `);
+  }
+  
+  $(".FOTag").empty();
+  $(".FOTag").append(output);
+
+  $(".FOTag .tag").click(function() {
+    console.log($(this));
+    if (state.filters.tags.data.includes($(this).attr("tag"))) {
+      state.filters.tags.data.splice(state.filters.tags.data.indexOf($(this).attr("tag")), 1);
+    } else {
+      state.filters.tags.data.push($(this).attr("tag"));
+    }
+    console.log(state.filters.tags.data);
+  });
+  
+}
 
