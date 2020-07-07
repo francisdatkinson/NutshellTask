@@ -16,6 +16,7 @@ let state = {
       data: 7200
     }
   },
+  tagColours: [],
   filtersVisible: false
 }
 
@@ -74,12 +75,14 @@ $(document).ready(() => {
     populateRecipeList(state.recipes);
   });
 
+  // enable/disable time filter
   $(".FOTime .toggle").click(function() {
     state.filters.time.enabled = !state.filters.time.enabled;
     updateToggles();
     populateRecipeList(state.recipes);
   });
 
+  // enable/disable tag filter
   $(".FOTag .toggle").click(function() {
     state.filters.tags.enabled = !state.filters.tags.enabled;
     if (state.filters.tags.enabled) {
@@ -92,12 +95,13 @@ $(document).ready(() => {
     populateRecipeList(state.recipes);
   });
 
+  // add/remove tag from filter list
   $(".FOTag .tag").click(function() {
     if (state.filters.tags.data.includes($(this).data("tag"))) {
-      $(this).css({"background": "transparent", "color": STEXT});
+      $(this).removeClass("active");
       state.filters.tags.data.splice(state.filters.tags.data.indexOf($(this).data("tag")), 1);
     } else {
-      $(this).css({"background": rgbVariation(PRIMARY, 20, false), "color": WHITE});
+      $(this).addClass("active");
       state.filters.tags.data.push($(this).data("tag"));
     }
     
@@ -111,7 +115,7 @@ $(document).ready(() => {
 init = () => {
   $(".recipeViewerOverlay").hide();
   $("#date").text(getYear()); // set current year in footer
-  $(".filterOptionsWrapper, #oven").hide(); // hide filter options initially
+  // $(".filterOptionsWrapper, #oven").hide(); // hide filter options initially
 
   // get recipes from a list of JSON files
   let urls = ['banana-oatmeal-cookie', 'basil-and-pesto-hummus', 'black-bean-and-rice-enchiladas', 'divine-hard-boiled-eggs', 'four-cheese-margherita-pizza', 'homemade-black-bean-veggie-burgers', 'homemade-chicken-enchiladas', 'marinated-grilled-shrimp', 'vegetable-fried-rice', 'vegetarian-korma', 'worlds-best-lasagna'];
@@ -120,6 +124,10 @@ init = () => {
   updateToggles();
   populateRecipeList(state.recipes); // populate recipe list with recipes
   addFilterTags(state.recipes); // add tags to filter section
+
+  generateTagColours(getAllTags(state.recipes));
+
+  updateTagColours();
   
 
   console.log('Recipes', state.recipes);
@@ -132,10 +140,14 @@ viewRecipe = (recipes, id) => {
   if (id != state.activeRecipe) {
     $(".recipeViewerOverlay").fadeIn();
     $(".recipeViewer").addClass('showRecipeViewer');
+    setTimeout(() => {
+      $("body").css("overflow", "hidden");
+    }, 200);
   } else {
+    setTimeout(() => {
+      $("body").css("overflow", "hidden");
+    }, 200);
     $(".recipeViewer #title p").text(recipe.title);
-
-    console.log(getTags(recipe)[0]);
 
     $(".recipeViewerOverlay").fadeIn();
 
@@ -145,7 +157,7 @@ viewRecipe = (recipes, id) => {
     $(".recipeViewer #tags").append(getTags(recipe)[0].toString().replace(/[\,\"\']/g, ''));
 
     $(".recipeViewer #title p").text(recipe.title);
-    $(".recipeViewer #author span").text(recipe.author.name);
+    $(".recipeViewer .author span").text(recipe.author.name);
     $(".recipeViewer #source a").attr("href", recipe.author.url);
 
     $(".recipeViewer #description").text(recipe.description);
@@ -172,6 +184,8 @@ viewRecipe = (recipes, id) => {
   }
 
   state.activeRecipe = id;
+
+  updateTagColours();
 }
 
 updateIngredients = (recipe) => {
@@ -189,8 +203,6 @@ updateIngredients = (recipe) => {
 }
 
 populateRecipeList = (recipes) => {
-  $(".recipeList").empty(); // clear the recipe list
-
   let allTags = state.filters.tags.data;
 
   let filteredRecipes = recipes.filter((r) => { // apply filters
@@ -225,22 +237,70 @@ populateRecipeList = (recipes) => {
   if (queriedRecipes.length % 2 != 0) { // pads out the recipe list to ensure individual recipes on a line are left-aligned 
     queriedRecipes.push({id:'-1', title: 'sentinel'});
   }
-  for (let i = 0; i < queriedRecipes.length; i++) {
+  let list1length = 0;
+  let list2length = 0;
+
+  let listCount = Math.floor($("main").width() / 540) > 3 ? 3 : Math.floor($("main").width() / 540) == 0 ? 1 : Math.floor($("main").width() / 540);
+
+  $(".recipeListWrapper").empty(); // clear the recipe list
+  for (let i = 0; i < listCount; i++) {
+    $(".recipeListWrapper").append(`
+      <div class="recipeList" id="recipeList${i}"></div>
+    `);
+  }
+
+  $(".recipeList").css("flex-basis", `${100 / listCount - 2}%`);
+
+  
+  
+  for (let i = 0; i < queriedRecipes.length - 1; i++) {
+    let r = queriedRecipes[i];
     let html = '';
 
-    html += `<div class="recipe ${queriedRecipes[i].title == 'sentinel' ? 'sentinel' : ''}" data-index="${queriedRecipes[i].id}">
-      <div class="title">${queriedRecipes[i].title}</div>
-      <div class="tags">${getTags(queriedRecipes[i])[0].toString().replace(/[\,\"\']/g, "")}</div>
-      <div class="description">${queriedRecipes[i].description}</div>
+    html += `<div class="recipe ${r.title == 'sentinel' ? 'sentinel' : ''}" data-index="${r.id}">
+      <div class="title">${r.title}</div>
+      <div class="tags">${getTags(r)[0].toString().replace(/[\,\"\']/g, "")}</div>
+      <div class="description">${r.description}</div>
+      <div class="timeAuthor">
+        <div class="recipeTime">${getTotalTime(r) == 0 ? '' : 'Recipe time: <span>' + getISO(getTotalTime(r)) + '</span>'}</div>
+        <div class="author">By <span>${r.author.name}</span></div>
+      </div>
+      
     </div>`;
 
-    $(".recipeList").append(html);
+    $(shortestList(listCount)).append(html);
+
+    updateTagColours();
+    
+
+    // if (list1length > list2length) {
+    //   $("#recipeList1").append(html);
+    //   // list2length += queriedRecipes[i].description.length;
+    //   list2length = $("#recipeList1").height();
+    // } else {
+    //   $("#recipeList0").append(html);
+    //   // list1length += queriedRecipes[i].description.length;
+    //   list1length = $("#recipeList0").height();
+    // }
   }
 
   $(".recipeList .recipe").click(function() {
     state.activeRecipe = parseInt($(this).data('index'));
     viewRecipe(recipes, state.activeRecipe);
   });
+}
+
+shortestList = (count) => {
+  let lists = [];
+  for (let i = 0; i < count; i++) {
+    let listHeight = 0;
+    $(`#recipeList${i}`).children().each(function() { // get combined height of list children
+      listHeight += $(this).outerHeight(true);
+    });
+    lists.push(listHeight);
+  }
+
+  return `#recipeList${lists.indexOf(Math.min(...lists))}`; // return shortest list
 }
 
 getYear = () => {
@@ -267,6 +327,15 @@ getAllTags = (recipes) => {
   return tags;
 }
 
+generateTagColours = (tags) => {
+  let tagColours = [];
+  for (t in tags) {
+    tagColours.push({tag: tags[t], colour: biasedRGB(false, 175)});
+  }
+
+  state.tagColours = tagColours;
+}
+
 getTags = (recipe) => {
   let output = [];
   let tags = [];
@@ -279,10 +348,6 @@ getTags = (recipe) => {
   }
 
   return [output, tags];
-}
-
-updateBubble = (value) => {
-  $(".value").text(getISO(value) == '02:00:00' ? '02:00:00+' : getISO(value));
 }
 
 updateFilters = (values, recipes) => { // takes an object of filter values and updates the respective filters
@@ -330,5 +395,14 @@ updateToggles = () => {
 hideRecipe = () => {
   $(".recipeViewer").removeClass('showRecipeViewer');
   $(".recipeViewerOverlay").fadeOut(100);
+  $("body").css("overflow", "scroll");
+}
+
+updateTagColours = () => {
+  $(".tag").each(function() {
+    if (state.tagColours.find(a => a.tag == $(this).text())) {
+      $(this).css("background", state.tagColours.find(a => a.tag == $(this).text()).colour);
+    }
+  });
 }
 

@@ -3,7 +3,7 @@
   <head>
     <title>Recipe Manager</title>
     <meta charset='utf-8'>
-    <!-- <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' /> -->
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
     <meta name="theme-color" content="#519c1c" />
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="shortcut icon" type="image/png" href="favicon.png"/>
@@ -41,29 +41,27 @@
         <input type="text" name="search">
       </div>
     </nav>
-    <div class="shift">
-      <header></header>
+    <div class="shift filterVisible">
       <main>
         <div class="recipeListWrapper">
-          <div class="recipeList"></div>
-          <div class="recipeListEnd">
-            <hr />
-            <p>End of Recipes</p>
-          </div>
+        </div>
+        <div class="recipeListEnd">
+          <div class="hr"></div>
+          <p>End of Recipes</p>
         </div>
       </main>
-      <footer>
-        <div class="copyright">
-          &copy; Francis Atkinson <span id="date"></span>
-        </div>
-      </footer>
     </div>
+    <footer>
+      <div class="copyright">
+        &copy; Francis Atkinson <span id="date"></span>
+      </div>
+    </footer>
     <!-- <div class="recipeViewerOverlay"> -->
       <div class="recipeViewer">
         <section id="title"><div class="escape"></div><p>Title Placeholder</p></section>
         <section id="tags">Tags</section>
         <div class="authorSource">
-          <section id="author">By <span>Author</span></section>
+          <section class="author">By <span>Author</span></section>
           <section id="source"><a>View original recipe</a></section>
         </div>
         <section id="description">desscription</section>
