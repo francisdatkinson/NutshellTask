@@ -5,9 +5,9 @@ random = (max) => { // returns a random number from 1 to the max
 
 randomRGB = (alpha) => { // returns a random rgb colour string, with the option of adding an alpha component with the boolean parameter 'alpha'
   if (alpha) {
-    return `rgba(${random(255)}, ${random(255)}, ${random(255)}, ${random(100) / 100}`;
+    return `rgba(${random(255)}, ${random(255)}, ${random(255)}, ${random(100) / 100})`;
   }
-  return `rgb(${random(255)}, ${random(255)}, ${random(255)}`;
+  return `rgb(${random(255)}, ${random(255)}, ${random(255)})`;
 }
 
 biasedRGB = (alpha, bias) => { 
