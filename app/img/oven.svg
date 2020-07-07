@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Serif DrawPlus 12,0,4,27 (May 24, 08:37:51) (http://www.serif.com) -->
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="250.292" height="250.292">
-	<g id="dp_group001" transform="matrix(1,0,0,1,-302.455,-609.773)">
-		<path id="dp_path002" fill="none" fill-rule="evenodd" stroke="#fca281" stroke-width="20.6667" d="M 427.6,620.119 C 491.003,620.119 542.4,671.516 542.4,734.919 C 542.4,798.321 491.003,849.719 427.6,849.719 C 364.197,849.719 312.8,798.321 312.8,734.919 C 312.8,671.516 364.197,620.119 427.6,620.119 Z "/>
-		<g id="dp_group003">
-			<path id="dp_path004" fill="none" fill-rule="evenodd" stroke="#fca281" stroke-width="12.7573" stroke-linejoin="round" stroke-linecap="round" d="M 372.36,791.035 C 382.003,774.779 381.12,759.264 372.36,744.305 C 360.752,727.779 360.569,712.421 372.36,697.901"/>
-			<path id="dp_path005" fill="none" fill-rule="evenodd" stroke="#fca281" stroke-width="12.7573" stroke-linejoin="round" stroke-linecap="round" d="M 429.047,815.068 C 438.689,798.812 437.807,783.297 429.047,768.339 C 417.439,751.812 417.257,736.455 429.047,721.935"/>
-			<path id="dp_path006" fill="none" fill-rule="evenodd" stroke="#fca281" stroke-width="12.7573" stroke-linejoin="round" stroke-linecap="round" d="M 484.712,791.035 C 494.355,774.779 493.472,759.264 484.712,744.305 C 473.103,727.779 472.921,712.421 484.712,697.901"/>
-			<path id="dp_path007" fill="none" fill-rule="evenodd" stroke="#fca281" stroke-width="12.7573" stroke-linejoin="round" stroke-linecap="round" d="M 428.111,652.768 C 438.807,652.768 447.477,661.439 447.477,672.135 C 447.477,682.831 438.807,691.501 428.111,691.501 C 417.415,691.501 408.744,682.831 408.744,672.135 C 408.744,661.439 417.415,652.768 428.111,652.768 Z "/>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="246.287" height="246.287">
+	<g id="selection" transform="matrix(1,0,0,1,-304.457,-611.776)">
+		<path id="dp_path001" fill="none" fill-rule="evenodd" stroke="#fca281" stroke-width="16.6667" d="M 427.6,620.119 C 491.003,620.119 542.4,671.516 542.4,734.919 C 542.4,798.321 491.003,849.719 427.6,849.719 C 364.197,849.719 312.8,798.321 312.8,734.919 C 312.8,671.516 364.197,620.119 427.6,620.119 Z "/>
+		<g id="dp_group002">
+			<path id="dp_path003" fill="none" fill-rule="evenodd" stroke="#fca281" stroke-width="11.972" stroke-linejoin="round" stroke-linecap="round" d="M 375.764,787.515 C 384.812,772.261 383.984,757.703 375.764,743.665 C 364.871,728.157 364.7,713.745 375.764,700.121"/>
+			<path id="dp_path004" fill="none" fill-rule="evenodd" stroke="#fca281" stroke-width="11.972" stroke-linejoin="round" stroke-linecap="round" d="M 428.957,810.068 C 438.007,794.815 437.179,780.255 428.957,766.219 C 418.065,750.709 417.895,736.297 428.957,722.673"/>
+			<path id="dp_path005" fill="none" fill-rule="evenodd" stroke="#fca281" stroke-width="11.972" stroke-linejoin="round" stroke-linecap="round" d="M 481.193,787.515 C 490.241,772.261 489.413,757.703 481.193,743.665 C 470.3,728.157 470.129,713.745 481.193,700.121"/>
+			<path id="dp_path006" fill="none" fill-rule="evenodd" stroke="#fca281" stroke-width="11.972" stroke-linejoin="round" stroke-linecap="round" d="M 428.08,657.768 C 438.117,657.768 446.255,665.904 446.255,675.941 C 446.255,685.979 438.117,694.115 428.08,694.115 C 418.043,694.115 409.905,685.979 409.905,675.941 C 409.905,665.904 418.043,657.768 428.08,657.768 Z "/>
 		</g>
 	</g>
 </svg>

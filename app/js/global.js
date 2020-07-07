@@ -8,11 +8,12 @@ let state = {
   query: '',
   filters: {
     tags: {
-      enabled: false,
+      enabled: true,
+      firstFilter: true,
       data: []
     },
     time: {
-      enabled: false,
+      enabled: true,
       data: 7200
     }
   },
@@ -65,7 +66,6 @@ $(document).ready(() => {
   // filter recipes based on time slider
   // ideally would be realtime updates
   $(".slider").change(() => {
-    updateBubble($(".slider").val());
     updateFilters({time: $(".slider").val()}, state.recipes);
   });
 
@@ -83,30 +83,20 @@ $(document).ready(() => {
   });
 
   // enable/disable tag filter
-  $(".FOTag .toggle").click(function() {
-    state.filters.tags.enabled = !state.filters.tags.enabled;
-    if (state.filters.tags.enabled) {
-      $(".FOTaf .tag").removeClass("disabled");
-    } else {
-      $(".FOTaf .tag").addClass("disabled");
-    }
+  // $(".FOTag .toggle").click(function() {
+  //   state.filters.tags.enabled = !state.filters.tags.enabled;
+  //   if (state.filters.tags.enabled) {
+  //     $(".FOTaf .tag").removeClass("disabled");
+  //   } else {
+  //     $(".FOTaf .tag").addClass("disabled");
+  //   }
     
-    updateToggles();
-    populateRecipeList(state.recipes);
-  });
+  //   updateToggles();
+  //   populateRecipeList(state.recipes);
+  // });
 
   // add/remove tag from filter list
-  $(".FOTag .tag").click(function() {
-    if (state.filters.tags.data.includes($(this).data("tag"))) {
-      $(this).removeClass("active");
-      state.filters.tags.data.splice(state.filters.tags.data.indexOf($(this).data("tag")), 1);
-    } else {
-      $(this).addClass("active");
-      state.filters.tags.data.push($(this).data("tag"));
-    }
-    
-    populateRecipeList(state.recipes);
-  });
+  
 
   //////////////////////////////////////////////////////////////
 });
@@ -121,13 +111,18 @@ init = () => {
   let urls = ['banana-oatmeal-cookie', 'basil-and-pesto-hummus', 'black-bean-and-rice-enchiladas', 'divine-hard-boiled-eggs', 'four-cheese-margherita-pizza', 'homemade-black-bean-veggie-burgers', 'homemade-chicken-enchiladas', 'marinated-grilled-shrimp', 'vegetable-fried-rice', 'vegetarian-korma', 'worlds-best-lasagna'];
   state.recipes = getRecipes(urls);
 
+  state.filters.tags.data = getAllTags(state.recipes);
   updateToggles();
   populateRecipeList(state.recipes); // populate recipe list with recipes
   addFilterTags(state.recipes); // add tags to filter section
 
   generateTagColours(getAllTags(state.recipes));
 
+  
+
   updateTagColours();
+
+  
   
 
   console.log('Recipes', state.recipes);
@@ -203,9 +198,6 @@ populateRecipeList = (recipes) => {
 
   let filteredRecipes = recipes.filter((r) => { // apply filters
     let temp = true;
-    if (!state.filters.time.enabled && !state.filters.tags.enabled) { // return true if all filters are disabled
-      return true;
-    }
     if (state.filters.time.enabled) { // run time filter if enabled
       let totalTime = getTotalTime(r);
       temp = (totalTime < state.filters.time.data || state.filters.time.data == 7200);
@@ -236,7 +228,7 @@ populateRecipeList = (recipes) => {
   let list1length = 0;
   let list2length = 0;
 
-  let listCount = Math.floor($("main").width() / 540) > 3 ? 3 : Math.floor($("main").width() / 540) == 0 ? 1 : Math.floor($("main").width() / 540);
+  let listCount = Math.floor($("main").width() / 540) > 3 ? 3 : Math.ceil($("main").width() / 540);
 
   $(".recipeListWrapper").empty(); // clear the recipe list
   for (let i = 0; i < listCount; i++) {
@@ -348,6 +340,7 @@ getTags = (recipe) => {
 
 updateFilters = (values, recipes) => { // takes an object of filter values and updates the respective filters
   if (values.time) {
+    console.log(values.time);
     state.filters.time.data = parseInt(values.time);
   }
   if (values.tags) {
@@ -359,15 +352,43 @@ updateFilters = (values, recipes) => { // takes an object of filter values and u
 
 addFilterTags = (recipes) => {
   let tags = getAllTags(recipes);
-  let output = [];
+  let output = [`<div class="clearTags disabled">clear filter</div>`];
   for (t in tags) {
     output.push(`
-      <div class="tag disabled" data-tag="${tags[t]}">${tags[t]}</div>
+      <div class="tag active" data-tag="${tags[t]}">${tags[t]}</div>
     `);
   }
   
   $(".FOTag .tags").empty();
   $(".FOTag .tags").append(output);
+
+  $(".FOTag .tag").click(function() {
+    if (state.filters.tags.firstFilter) {
+      $(".clearTags").removeClass("disabled");
+      $(".FOTag .tag").removeClass("active");
+      $(this).addClass("active");
+      state.filters.tags.data = [$(this).data("tag")];
+      state.filters.tags.firstFilter = false;
+    } else if (state.filters.tags.data.includes($(this).data("tag"))) {
+      $(this).removeClass("active");
+      state.filters.tags.data.splice(state.filters.tags.data.indexOf($(this).data("tag")), 1);
+    } else {
+      $(this).addClass("active");
+      state.filters.tags.data.push($(this).data("tag"));
+    }
+
+    console.log(state.filters.tags.data);
+    
+    populateRecipeList(state.recipes);
+  });
+
+  $(".clearTags").click(() => {
+    state.filters.tags.data = getAllTags(state.recipes);
+    populateRecipeList(state.recipes);
+    addFilterTags(state.recipes);
+    updateTagColours();
+    state.filters.tags.firstFilter = true;
+  });
 }
 
 updateToggles = () => {
