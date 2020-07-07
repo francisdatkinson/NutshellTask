@@ -1,6 +1,6 @@
 // Colours
 
-const PRIMARY = '#62bd20';
+const PRIMARY = 'rgb(98, 189, 32)';
 const SECONDARY = '#f56d05';
 const PRIMARYDISABLED = '#62e2a4';
 const SECONDARYDISABLED = '#ffaf73';
