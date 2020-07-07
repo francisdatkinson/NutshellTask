@@ -53,8 +53,8 @@ nav {
   justify-content: space-between;
   top: 0;
   width: 100%;
-  background: $primary;
-  color: $white;
+  background: $white;
+  color: $sText;
   margin-bottom: 1rem;
   box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
   border-bottom: 5px solid $white;
@@ -677,7 +677,7 @@ footer {
 
       & .time {
         padding: 0 0 0 3vmin;
-        color: $white;
+        color: $subtleHover;
         font-size: 2em;
       }
 
