@@ -675,8 +675,13 @@ footer .copyright {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
 }
-/* line 698, ../sass/styles.scss */
+/* line 699, ../sass/styles.scss */
+.recipeViewer #oven:hover div {
+  background-image: url(../img/cycle.svg);
+}
+/* line 703, ../sass/styles.scss */
 .recipeViewer #oven div {
   width: 1.8em;
   height: 1.8em;
@@ -685,24 +690,25 @@ footer .copyright {
   background-size: 75%;
   background-position: center center;
   background-image: url(../img/oven.svg);
+  transition: all 0.1s ease;
 }
-/* line 709, ../sass/styles.scss */
+/* line 715, ../sass/styles.scss */
 .recipeViewer section.ingredients {
   margin-top: 1em;
 }
-/* line 713, ../sass/styles.scss */
+/* line 719, ../sass/styles.scss */
 .recipeViewer #directions {
   margin-top: 1em;
 }
-/* line 716, ../sass/styles.scss */
+/* line 722, ../sass/styles.scss */
 .recipeViewer #directions .directionBreak {
   margin: 1em 0;
 }
-/* line 720, ../sass/styles.scss */
+/* line 726, ../sass/styles.scss */
 .recipeViewer #directions .direction {
   margin-bottom: 1em;
 }
-/* line 736, ../sass/styles.scss */
+/* line 742, ../sass/styles.scss */
 .recipeViewer #directions .timer {
   margin-bottom: 1em;
   width: 50%;
@@ -715,17 +721,17 @@ footer .copyright {
   align-items: center;
   cursor: pointer;
 }
-/* line 748, ../sass/styles.scss */
+/* line 754, ../sass/styles.scss */
 .recipeViewer #directions .timer:hover {
   opacity: 0.9;
 }
-/* line 752, ../sass/styles.scss */
+/* line 758, ../sass/styles.scss */
 .recipeViewer #directions .timer .time {
   padding: 0 0 0 3vmin;
   color: #fafafa;
   font-size: 2em;
 }
-/* line 758, ../sass/styles.scss */
+/* line 764, ../sass/styles.scss */
 .recipeViewer #directions .timer .control {
   width: 4rem;
   height: 4rem;
@@ -736,9 +742,10 @@ footer .copyright {
 }
 
 @media (max-width: 37.5em) {
-  /* line 3, ../sass/partials/_mobile.scss */
+  /* line 2, ../sass/partials/_mobile.scss */
   nav .navWrapper {
     max-width: 1440px;
+    justify-content: space-between;
   }
   /* line 7, ../sass/partials/_mobile.scss */
   nav .logo {
@@ -748,74 +755,86 @@ footer .copyright {
   nav .title {
     white-space: nowrap;
     margin-left: 1rem;
+    display: none;
   }
-  /* line 16, ../sass/partials/_mobile.scss */
+  /* line 15, ../sass/partials/_mobile.scss */
+  nav .search {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+  }
+  /* line 20, ../sass/partials/_mobile.scss */
+  nav .search .filter {
+    left: 0;
+    background-size: 50%;
+  }
+  /* line 27, ../sass/partials/_mobile.scss */
   nav .filterOptionsWrapper {
     height: 10rem;
   }
-  /* line 19, ../sass/partials/_mobile.scss */
+  /* line 30, ../sass/partials/_mobile.scss */
   nav .filterOptionsWrapper p {
     padding: 1rem;
     white-space: nowrap;
   }
-  /* line 24, ../sass/partials/_mobile.scss */
+  /* line 35, ../sass/partials/_mobile.scss */
   nav .filterOptionsWrapper .FOTag {
     height: auto;
   }
-  /* line 26, ../sass/partials/_mobile.scss */
+  /* line 37, ../sass/partials/_mobile.scss */
   nav .filterOptionsWrapper .FOTag .tags {
     overflow-x: scroll;
   }
-  /* line 29, ../sass/partials/_mobile.scss */
+  /* line 40, ../sass/partials/_mobile.scss */
   nav .filterOptionsWrapper .FOTag .tags .clearTags {
     height: 1.2em;
   }
-  /* line 33, ../sass/partials/_mobile.scss */
+  /* line 44, ../sass/partials/_mobile.scss */
   nav .filterOptionsWrapper .FOTag .tags .tag {
     margin-bottom: 1rem;
   }
 
-  /* line 41, ../sass/partials/_mobile.scss */
+  /* line 52, ../sass/partials/_mobile.scss */
   .recipeListWrapper {
     width: 90%;
   }
-  /* line 44, ../sass/partials/_mobile.scss */
+  /* line 55, ../sass/partials/_mobile.scss */
   .recipeListWrapper .recipeList {
     margin: 0 5vw;
   }
 
-  /* line 49, ../sass/partials/_mobile.scss */
+  /* line 60, ../sass/partials/_mobile.scss */
   .recipeViewer {
     height: 100vh;
     top: 0;
     border-radius: 0;
   }
-  /* line 55, ../sass/partials/_mobile.scss */
+  /* line 66, ../sass/partials/_mobile.scss */
   .recipeViewer #title p {
     font-size: 2em;
   }
-  /* line 59, ../sass/partials/_mobile.scss */
+  /* line 70, ../sass/partials/_mobile.scss */
   .recipeViewer #title .escape {
     background-image: url(../img/cross.svg);
   }
-  /* line 64, ../sass/partials/_mobile.scss */
+  /* line 75, ../sass/partials/_mobile.scss */
   .recipeViewer #tags {
     width: 100%;
   }
-  /* line 67, ../sass/partials/_mobile.scss */
+  /* line 78, ../sass/partials/_mobile.scss */
   .recipeViewer #tags .tag {
     margin-right: 1em;
   }
-  /* line 72, ../sass/partials/_mobile.scss */
+  /* line 83, ../sass/partials/_mobile.scss */
   .recipeViewer #description {
     margin-top: 1.5em;
   }
-  /* line 76, ../sass/partials/_mobile.scss */
+  /* line 87, ../sass/partials/_mobile.scss */
   .recipeViewer .timer {
     width: 80%;
   }
 
-  /* line 81, ../sass/partials/_mobile.scss */
+  /* line 92, ../sass/partials/_mobile.scss */
   .textHider {
     top: 0;
     height: 4vh;

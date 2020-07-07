@@ -694,6 +694,11 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
+
+    &:hover div {
+      background-image: url(../img/cycle.svg);
+    }
 
     & div {
       width: 1.8em;
@@ -703,6 +708,7 @@ footer {
       background-size: 75%;
       background-position: center center;
       background-image: url(../img/oven.svg);
+      transition: all 0.1s ease;
     }
   }
 
@@ -766,16 +772,6 @@ footer {
       }
     }
   }
-
-  // & div.ingredients {
-  //   position: fixed;
-  //   right: -60%;
-  //   top: 0;
-  //   height: 100%;
-  //   width: 60%;
-  //   background: $faded;
-  //   transform: translateX(-3rem);
-  // }
 }
 
 @media (max-width:37.5em){
