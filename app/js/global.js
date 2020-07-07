@@ -75,12 +75,14 @@ $(document).ready(() => {
     populateRecipeList(state.recipes);
   });
 
+  // enable/disable time filter
   $(".FOTime .toggle").click(function() {
     state.filters.time.enabled = !state.filters.time.enabled;
     updateToggles();
     populateRecipeList(state.recipes);
   });
 
+  // enable/disable tag filter
   $(".FOTag .toggle").click(function() {
     state.filters.tags.enabled = !state.filters.tags.enabled;
     if (state.filters.tags.enabled) {
@@ -93,12 +95,13 @@ $(document).ready(() => {
     populateRecipeList(state.recipes);
   });
 
+  // add/remove tag from filter list
   $(".FOTag .tag").click(function() {
     if (state.filters.tags.data.includes($(this).data("tag"))) {
-      $(this).css({"background": "transparent", "color": STEXT});
+      $(this).removeClass("active");
       state.filters.tags.data.splice(state.filters.tags.data.indexOf($(this).data("tag")), 1);
     } else {
-      $(this).css({"background": rgbVariation(PRIMARY, 20, false), "color": WHITE});
+      $(this).addClass("active");
       state.filters.tags.data.push($(this).data("tag"));
     }
     
@@ -112,7 +115,7 @@ $(document).ready(() => {
 init = () => {
   $(".recipeViewerOverlay").hide();
   $("#date").text(getYear()); // set current year in footer
-  $(".filterOptionsWrapper, #oven").hide(); // hide filter options initially
+  // $(".filterOptionsWrapper, #oven").hide(); // hide filter options initially
 
   // get recipes from a list of JSON files
   let urls = ['banana-oatmeal-cookie', 'basil-and-pesto-hummus', 'black-bean-and-rice-enchiladas', 'divine-hard-boiled-eggs', 'four-cheese-margherita-pizza', 'homemade-black-bean-veggie-burgers', 'homemade-chicken-enchiladas', 'marinated-grilled-shrimp', 'vegetable-fried-rice', 'vegetarian-korma', 'worlds-best-lasagna'];
@@ -347,10 +350,6 @@ getTags = (recipe) => {
   return [output, tags];
 }
 
-updateBubble = (value) => {
-  $(".value").text(getISO(value) == '02:00:00' ? '02:00:00+' : getISO(value));
-}
-
 updateFilters = (values, recipes) => { // takes an object of filter values and updates the respective filters
   if (values.time) {
     state.filters.time.data = parseInt(values.time);
@@ -404,7 +403,6 @@ updateTagColours = () => {
     if (state.tagColours.find(a => a.tag == $(this).text())) {
       $(this).css("background", state.tagColours.find(a => a.tag == $(this).text()).colour);
     }
-    
   });
 }
 

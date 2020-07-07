@@ -108,10 +108,11 @@ nav {
     & .filterOptionsWrapper {
       width: 100vw;
       height: 8rem;
-      background: white;
+      background: $background;
       position: fixed;
       top: 5rem;
-      box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+      padding-top: 1rem;
+      // box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
       left: 0;
       display: flex;
       flex-flow: column;
@@ -160,9 +161,6 @@ nav {
         }
 
         &.FOTime {
-          &:hover {
-            background: $subtleHover;
-          }
 
           & p {
             font-size: 1em;
@@ -181,16 +179,16 @@ nav {
             color: $sText;
           }
 
-          /* The slider itself */
+          
           & .slider {
-            -webkit-appearance: none;  /* Override default CSS styles */
+            -webkit-appearance: none;
             appearance: none;
-            width: 100%; /* Full-width */
-            height: 100%; /* Specified height */
-            background: transparent; /* Grey background */
-            outline: none; /* Remove outline */
-            opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
-            -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+            width: 100%;
+            height: 0.3rem;
+            background: $white;
+            outline: none;
+            opacity: 0.7;
+            -webkit-transition: .2s;
             transition: opacity .2s;
             padding: 0;
             margin: 0;
@@ -199,39 +197,41 @@ nav {
             z-index: 101;
 
             &:hover {
-              opacity: 1; /* Fully shown on mouse-over */
+              opacity: 1;
             }
 
             &.disabled {
               pointer-events: none;
 
               &::-webkit-slider-thumb {
-                -webkit-appearance: none; /* Override default look */
+                -webkit-appearance: none;
                 appearance: none;
-                width: 25px; /* Set a specific slider handle width */
-                height: 4rem; /* Slider handle height */
-                background: $faded; /* Green background */
+                width: 1rem;
+                height: 1rem;
+                border-radius: 1rem;
+                background: $faded;
                 
-                cursor: default; /* Cursor on hover */
+                cursor: default;
               }
             }
   
-            /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+            
             &::-webkit-slider-thumb {
-              -webkit-appearance: none; /* Override default look */
+              -webkit-appearance: none;
               appearance: none;
-              width: 25px; /* Set a specific slider handle width */
-              height: 4rem; /* Slider handle height */
-              background: $primary; /* Green background */
+              width: 1rem;
+              border-radius: 1rem;
+              height: 1rem;
+              background: $primary;
               
-              cursor: pointer; /* Cursor on hover */
+              cursor: pointer;
             }
   
             &::-moz-range-thumb {
-              width: 25px; /* Set a specific slider handle width */
-              height: 25px; /* Slider handle height */
-              background: #4CAF50; /* Green background */
-              cursor: pointer; /* Cursor on hover */
+              width: 25px;
+              height: 25px;
+              background: #4CAF50;
+              cursor: pointer;
             }
           }
 
@@ -240,31 +240,45 @@ nav {
         }
 
         &.FOTag {
-          & .tags {
-            width: 100vw;
-            display: flex;
-            flex-flow: row nowrap;
+          display: flex;
+          justify-content: flex-start;
 
+          & .tags {
+            padding-left: 15px;
+            display: flex;
+            box-sizing: border-box;
+            // overflow-x: scroll;
+
+            // &::-webkit-scrollbar {
+            //   width: 0px;
+            // }
+            
             & .tag {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              flex: 1;
-              height: 4rem;
+              white-space: nowrap;
+              color: $sText;
+              border-radius: 100px;
+              padding: 3px 15px 4px 15px;
+              margin-right: 15px;
+              box-shadow: 2px 3px 4px rgba(0,0,0,0.2);
+              transition: all 0.2s ease;
+              box-sizing: border-box;
+
+              &.active {
+                box-shadow: none;
+              }
+
+              &:hover {
+                text-decoration: underline;
+              }
 
               &.disabled {
                 filter: saturate(0%);
                 opacity: 0.5;
                 pointer-events: none;
-              }
-  
-              &:hover {
-                background: $subtleHover;
+                box-shadow: none;
               }
             }
           }
-          
-          
         }
       }
 
@@ -336,6 +350,7 @@ main {
         margin-bottom: 1rem;
         overflow: hidden;
         transition: all 0.2s ease;
+        border-radius: 10px;
         cursor: pointer;
     
         &.sentinel {
@@ -414,17 +429,6 @@ main {
         }
       }
     }
-  
-    & .recipeListEnd {
-      width: 100%;
-      padding: 2rem 10%;
-      box-sizing: border-box;
-      height: 10rem;
-      text-align: center;
-      color: $sText;
-  
-      
-    }
   }
 
   & .recipeListEnd {
@@ -432,12 +436,15 @@ main {
     flex-flow: column;
     justify-content: center;
     align-items: center;
+    margin-top: 2rem;
+    color: $sText;
 
     & .hr {
-      height: 0;
-      width: 80%;
-      border: solid 1px $faded;
-      border-width: 1px 0 0 0;
+      height: 5px;
+      background: $white;
+      width: 14%;
+      border-radius: 10px;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
     }
   }
 }
@@ -526,7 +533,7 @@ footer {
     & p {
       font-size: 3em;
       font-weight: bold;
-      color: $pText;
+      color: $sText;
     }
 
     & .escape {
