@@ -60,14 +60,13 @@ nav {
   color: #555555;
   margin-bottom: 1rem;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
-  border-bottom: 5px solid #ffffff;
   z-index: 100;
 }
-/* line 64, ../sass/styles.scss */
+/* line 63, ../sass/styles.scss */
 nav p {
   font-size: 1.4em;
 }
-/* line 68, ../sass/styles.scss */
+/* line 67, ../sass/styles.scss */
 nav .logo {
   background-repeat: no-repeat;
   background-size: 70%;
@@ -81,14 +80,14 @@ nav .logo {
   transition: all 0.2s ease;
   z-index: 101;
 }
-/* line 82, ../sass/styles.scss */
+/* line 81, ../sass/styles.scss */
 nav .search {
   height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-/* line 88, ../sass/styles.scss */
+/* line 87, ../sass/styles.scss */
 nav .search .filter {
   width: 5rem;
   height: 5rem;
@@ -100,25 +99,26 @@ nav .search .filter {
   left: 3rem;
   cursor: pointer;
 }
-/* line 99, ../sass/styles.scss */
+/* line 98, ../sass/styles.scss */
 nav .search .filter:hover {
   background-color: rgba(255, 255, 255, 0.2);
 }
-/* line 104, ../sass/styles.scss */
+/* line 103, ../sass/styles.scss */
 nav .search .filterOptionsWrapper {
   width: 100vw;
   height: 8rem;
-  background: #f2f2f2;
+  background: #fafafa;
   position: fixed;
   top: 5rem;
   padding-top: 1rem;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
   left: 0;
   display: flex;
   flex-flow: column;
   justify-content: center;
   align-items: center;
 }
-/* line 118, ../sass/styles.scss */
+/* line 117, ../sass/styles.scss */
 nav .search .filterOptionsWrapper .filterOption {
   display: flex;
   width: 100%;
@@ -130,7 +130,7 @@ nav .search .filterOptionsWrapper .filterOption {
   transition: all 0.2s ease;
   cursor: pointer;
 }
-/* line 129, ../sass/styles.scss */
+/* line 128, ../sass/styles.scss */
 nav .search .filterOptionsWrapper .filterOption .toggle {
   width: 4rem;
   min-width: 4rem;
@@ -140,14 +140,14 @@ nav .search .filterOptionsWrapper .filterOption .toggle {
   justify-content: center;
   align-items: center;
 }
-/* line 138, ../sass/styles.scss */
+/* line 137, ../sass/styles.scss */
 nav .search .filterOptionsWrapper .filterOption .toggle .track {
   width: 2.3rem;
   height: 1rem;
   border-radius: 1rem;
   background: #ffffff;
 }
-/* line 145, ../sass/styles.scss */
+/* line 144, ../sass/styles.scss */
 nav .search .filterOptionsWrapper .filterOption .toggle .ball {
   position: absolute;
   width: 1.5rem;
@@ -157,23 +157,31 @@ nav .search .filterOptionsWrapper .filterOption .toggle .ball {
   left: 0.5rem;
   transition: all 0.1s ease;
 }
-/* line 154, ../sass/styles.scss */
+/* line 153, ../sass/styles.scss */
 nav .search .filterOptionsWrapper .filterOption .toggle .ball.enabled {
   background: #6ccc85;
   left: 1.5rem;
 }
-/* line 161, ../sass/styles.scss */
+/* line 160, ../sass/styles.scss */
 nav .search .filterOptionsWrapper .filterOption.FOTime {
   /* Mouse-over effects */
 }
-/* line 163, ../sass/styles.scss */
+/* line 162, ../sass/styles.scss */
 nav .search .filterOptionsWrapper .filterOption.FOTime p {
   font-size: 1em;
   width: 5em;
   padding: 0;
   margin: 0;
 }
-/* line 170, ../sass/styles.scss */
+/* line 168, ../sass/styles.scss */
+nav .search .filterOptionsWrapper .filterOption.FOTime p:first-child {
+  margin-left: 3rem;
+}
+/* line 172, ../sass/styles.scss */
+nav .search .filterOptionsWrapper .filterOption.FOTime p:last-child {
+  margin-right: 3rem;
+}
+/* line 177, ../sass/styles.scss */
 nav .search .filterOptionsWrapper .filterOption.FOTime .value {
   width: 3rem;
   height: 2rem;
@@ -183,7 +191,7 @@ nav .search .filterOptionsWrapper .filterOption.FOTime .value {
   align-items: center;
   color: #555555;
 }
-/* line 181, ../sass/styles.scss */
+/* line 188, ../sass/styles.scss */
 nav .search .filterOptionsWrapper .filterOption.FOTime .slider {
   -webkit-appearance: none;
   appearance: none;
@@ -200,15 +208,15 @@ nav .search .filterOptionsWrapper .filterOption.FOTime .slider {
   position: relative;
   z-index: 101;
 }
-/* line 197, ../sass/styles.scss */
+/* line 204, ../sass/styles.scss */
 nav .search .filterOptionsWrapper .filterOption.FOTime .slider:hover {
   opacity: 1;
 }
-/* line 201, ../sass/styles.scss */
+/* line 208, ../sass/styles.scss */
 nav .search .filterOptionsWrapper .filterOption.FOTime .slider.disabled {
   pointer-events: none;
 }
-/* line 204, ../sass/styles.scss */
+/* line 211, ../sass/styles.scss */
 nav .search .filterOptionsWrapper .filterOption.FOTime .slider.disabled::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
@@ -218,7 +226,7 @@ nav .search .filterOptionsWrapper .filterOption.FOTime .slider.disabled::-webkit
   background: #8e8e8e;
   cursor: default;
 }
-/* line 217, ../sass/styles.scss */
+/* line 224, ../sass/styles.scss */
 nav .search .filterOptionsWrapper .filterOption.FOTime .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
@@ -228,58 +236,85 @@ nav .search .filterOptionsWrapper .filterOption.FOTime .slider::-webkit-slider-t
   background: #6ccc85;
   cursor: pointer;
 }
-/* line 228, ../sass/styles.scss */
+/* line 235, ../sass/styles.scss */
 nav .search .filterOptionsWrapper .filterOption.FOTime .slider::-moz-range-thumb {
   width: 25px;
   height: 25px;
   background: #4CAF50;
   cursor: pointer;
 }
-/* line 240, ../sass/styles.scss */
+/* line 247, ../sass/styles.scss */
 nav .search .filterOptionsWrapper .filterOption.FOTag {
   display: flex;
   justify-content: flex-start;
 }
-/* line 244, ../sass/styles.scss */
+/* line 251, ../sass/styles.scss */
+nav .search .filterOptionsWrapper .filterOption.FOTag .clearTags {
+  border: solid 2px #000000;
+  background: #ffffff;
+  padding: 3px 15px 4px 15px;
+  margin-right: 15px;
+  white-space: nowrap;
+  border-radius: 100px;
+  transition: all 0.2s ease;
+}
+/* line 260, ../sass/styles.scss */
+nav .search .filterOptionsWrapper .filterOption.FOTag .clearTags:hover {
+  background: #000000;
+  color: #ffffff;
+}
+/* line 265, ../sass/styles.scss */
+nav .search .filterOptionsWrapper .filterOption.FOTag .clearTags.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+/* line 271, ../sass/styles.scss */
 nav .search .filterOptionsWrapper .filterOption.FOTag .tags {
   padding-left: 15px;
   display: flex;
+  width: 100%;
   box-sizing: border-box;
+  justify-content: space-evenly;
 }
-/* line 254, ../sass/styles.scss */
+/* line 283, ../sass/styles.scss */
 nav .search .filterOptionsWrapper .filterOption.FOTag .tags .tag {
   white-space: nowrap;
   color: #555555;
   border-radius: 100px;
   padding: 3px 15px 4px 15px;
   margin-right: 15px;
-  box-shadow: 2px 3px 4px rgba(0, 0, 0, 0.2);
+  opacity: 0.7;
   transition: all 0.2s ease;
   box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: saturate(0%);
 }
-/* line 264, ../sass/styles.scss */
+/* line 297, ../sass/styles.scss */
 nav .search .filterOptionsWrapper .filterOption.FOTag .tags .tag.active {
-  box-shadow: none;
+  opacity: 1;
+  filter: saturate(100%);
 }
-/* line 268, ../sass/styles.scss */
+/* line 302, ../sass/styles.scss */
 nav .search .filterOptionsWrapper .filterOption.FOTag .tags .tag:hover {
   text-decoration: underline;
 }
-/* line 272, ../sass/styles.scss */
+/* line 306, ../sass/styles.scss */
 nav .search .filterOptionsWrapper .filterOption.FOTag .tags .tag.disabled {
   filter: saturate(0%);
   opacity: 0.5;
   pointer-events: none;
   box-shadow: none;
 }
-/* line 283, ../sass/styles.scss */
+/* line 317, ../sass/styles.scss */
 nav .search .filterOptionsWrapper .filterControl {
   width: 100vw;
   box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
   height: 5rem;
   background: #ffffff;
 }
-/* line 291, ../sass/styles.scss */
+/* line 325, ../sass/styles.scss */
 nav .search .eyeglass {
   width: 3rem;
   height: 3rem;
@@ -291,7 +326,7 @@ nav .search .eyeglass {
   left: 3.05rem;
   bottom: 0.03rem;
 }
-/* line 304, ../sass/styles.scss */
+/* line 338, ../sass/styles.scss */
 nav .search .searchInput {
   height: 1.5em;
   padding: 0.3em 0.3em 0.3em 2.3em;
@@ -302,17 +337,17 @@ nav .search .searchInput {
   border-radius: 2em;
   color: #555555;
 }
-/* line 314, ../sass/styles.scss */
+/* line 348, ../sass/styles.scss */
 nav .search .searchInput:focus {
   outline: none;
 }
 
-/* line 324, ../sass/styles.scss */
+/* line 358, ../sass/styles.scss */
 main {
   display: flex;
   flex-flow: column;
 }
-/* line 328, ../sass/styles.scss */
+/* line 362, ../sass/styles.scss */
 main .recipeListWrapper {
   display: flex;
   flex-flow: row nowrap;
@@ -320,7 +355,7 @@ main .recipeListWrapper {
   margin: auto;
   justify-content: space-evenly;
 }
-/* line 335, ../sass/styles.scss */
+/* line 369, ../sass/styles.scss */
 main .recipeListWrapper .recipeList {
   flex-basis: 50%;
   display: flex;
@@ -329,7 +364,7 @@ main .recipeListWrapper .recipeList {
   align-items: center;
   max-width: 1080px;
 }
-/* line 344, ../sass/styles.scss */
+/* line 378, ../sass/styles.scss */
 main .recipeListWrapper .recipeList .recipe {
   position: relative;
   width: 100%;
@@ -343,31 +378,31 @@ main .recipeListWrapper .recipeList .recipe {
   border-radius: 10px;
   cursor: pointer;
 }
-/* line 357, ../sass/styles.scss */
+/* line 391, ../sass/styles.scss */
 main .recipeListWrapper .recipeList .recipe.sentinel {
   opacity: 0;
   cursor: default;
   pointer-events: none;
 }
-/* line 363, ../sass/styles.scss */
+/* line 397, ../sass/styles.scss */
 main .recipeListWrapper .recipeList .recipe:hover {
   background: #fafafa;
 }
-/* line 369, ../sass/styles.scss */
+/* line 403, ../sass/styles.scss */
 main .recipeListWrapper .recipeList .recipe .title {
   font-size: 25px;
   color: #000000;
 }
-/* line 374, ../sass/styles.scss */
+/* line 408, ../sass/styles.scss */
 main .recipeListWrapper .recipeList .recipe .tags {
   display: flex;
   flex-flow: row wrap;
-  margin-top: 6px;
+  margin-top: 8px;
   justify-content: flex-start;
   align-items: center;
   overflow-y: scroll;
 }
-/* line 383, ../sass/styles.scss */
+/* line 417, ../sass/styles.scss */
 main .recipeListWrapper .recipeList .recipe .tags .tag {
   font-size: 0.8em;
   margin: 0 1.4em 3px 0;
@@ -376,44 +411,44 @@ main .recipeListWrapper .recipeList .recipe .tags .tag {
   cursor: pointer;
   color: #555555;
 }
-/* line 391, ../sass/styles.scss */
+/* line 425, ../sass/styles.scss */
 main .recipeListWrapper .recipeList .recipe .tags .tag:hover {
   text-decoration: underline;
 }
-/* line 399, ../sass/styles.scss */
+/* line 433, ../sass/styles.scss */
 main .recipeListWrapper .recipeList .recipe .description {
   color: #555555;
   font-size: 16px;
-  margin-top: 1vmin;
+  margin-top: 16px;
   letter-spacing: 0.02em;
   line-height: 1.3em;
 }
-/* line 407, ../sass/styles.scss */
+/* line 441, ../sass/styles.scss */
 main .recipeListWrapper .recipeList .recipe .timeAuthor {
   margin-top: 16px;
   display: flex;
   justify-content: space-between;
 }
-/* line 413, ../sass/styles.scss */
+/* line 447, ../sass/styles.scss */
 main .recipeListWrapper .recipeList .recipe .recipeTime {
   color: #8e8e8e;
   font-size: 13px;
 }
-/* line 417, ../sass/styles.scss */
+/* line 451, ../sass/styles.scss */
 main .recipeListWrapper .recipeList .recipe .recipeTime span {
   color: #000000;
 }
-/* line 422, ../sass/styles.scss */
+/* line 456, ../sass/styles.scss */
 main .recipeListWrapper .recipeList .recipe .author {
   color: #8e8e8e;
   font-size: 13px;
   text-align: right;
 }
-/* line 427, ../sass/styles.scss */
+/* line 461, ../sass/styles.scss */
 main .recipeListWrapper .recipeList .recipe .author span {
   color: #000000;
 }
-/* line 435, ../sass/styles.scss */
+/* line 469, ../sass/styles.scss */
 main .recipeListEnd {
   display: flex;
   flex-flow: column;
@@ -422,7 +457,7 @@ main .recipeListEnd {
   margin-top: 2rem;
   color: #555555;
 }
-/* line 443, ../sass/styles.scss */
+/* line 477, ../sass/styles.scss */
 main .recipeListEnd .hr {
   height: 5px;
   background: #ffffff;
@@ -431,7 +466,7 @@ main .recipeListEnd .hr {
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-/* line 455, ../sass/styles.scss */
+/* line 489, ../sass/styles.scss */
 footer {
   width: 15rem;
   display: flex;
@@ -447,12 +482,12 @@ footer {
   padding: 0.8rem 1rem;
   box-sizing: border-box;
 }
-/* line 470, ../sass/styles.scss */
+/* line 504, ../sass/styles.scss */
 footer .copyright {
   color: #555555;
 }
 
-/* line 474, ../sass/styles.scss */
+/* line 508, ../sass/styles.scss */
 .recipeViewerOverlay {
   width: 110vw;
   height: 110vh;
@@ -463,11 +498,11 @@ footer .copyright {
   z-index: 200;
 }
 
-/* line 484, ../sass/styles.scss */
+/* line 518, ../sass/styles.scss */
 .textHider {
   position: fixed;
   right: 0;
-  border-radius: 2rem 0 0 0;
+  border-radius: 1rem 0 0 0;
   color: transparent;
   width: 100vw;
   height: 5rem;
@@ -479,12 +514,12 @@ footer .copyright {
   transform: translate(100vw);
   transition: all 0.5s ease;
 }
-/* line 499, ../sass/styles.scss */
+/* line 533, ../sass/styles.scss */
 .textHider.showRecipeViewer {
   transform: translate(0);
 }
 
-/* line 505, ../sass/styles.scss */
+/* line 539, ../sass/styles.scss */
 .recipeViewer {
   width: 100vw;
   max-width: 1080px;
@@ -500,49 +535,49 @@ footer .copyright {
   padding: 5.5vmin 3vmin 0 3vmin;
   box-sizing: border-box;
   z-index: 201;
-  border-radius: 2rem 0 0 0;
+  border-radius: 1rem 0 0 0;
   /* width */
   /* Track */
   /* Handle */
   /* Handle on hover */
 }
-/* line 525, ../sass/styles.scss */
+/* line 559, ../sass/styles.scss */
 .recipeViewer::-webkit-scrollbar {
   width: 0px;
 }
-/* line 531, ../sass/styles.scss */
+/* line 565, ../sass/styles.scss */
 .recipeViewer::-webkit-scrollbar-track {
   background: transparent;
 }
-/* line 536, ../sass/styles.scss */
+/* line 570, ../sass/styles.scss */
 .recipeViewer::-webkit-scrollbar-thumb {
   background: #6ccc85;
   border-radius: 5px;
   opacity: 0.6;
 }
-/* line 543, ../sass/styles.scss */
+/* line 577, ../sass/styles.scss */
 .recipeViewer::-webkit-scrollbar-thumb:hover {
   background: #62e2a4;
 }
-/* line 547, ../sass/styles.scss */
+/* line 581, ../sass/styles.scss */
 .recipeViewer p {
   margin: 0;
 }
-/* line 551, ../sass/styles.scss */
+/* line 585, ../sass/styles.scss */
 .recipeViewer.showRecipeViewer {
   transform: translate(0);
 }
-/* line 555, ../sass/styles.scss */
+/* line 589, ../sass/styles.scss */
 .recipeViewer #title {
   display: flex;
 }
-/* line 558, ../sass/styles.scss */
+/* line 592, ../sass/styles.scss */
 .recipeViewer #title p {
   font-size: 3em;
   font-weight: bold;
   color: #555555;
 }
-/* line 564, ../sass/styles.scss */
+/* line 598, ../sass/styles.scss */
 .recipeViewer #title .escape {
   width: 3em;
   height: 3em;
@@ -554,11 +589,11 @@ footer .copyright {
   background-image: url(../img/arrow.svg);
   cursor: pointer;
 }
-/* line 575, ../sass/styles.scss */
+/* line 609, ../sass/styles.scss */
 .recipeViewer #title .escape:hover {
   opacity: 0.6;
 }
-/* line 583, ../sass/styles.scss */
+/* line 617, ../sass/styles.scss */
 .recipeViewer #tags {
   margin-top: 1em;
   display: flex;
@@ -566,18 +601,18 @@ footer .copyright {
   flex-flow: row wrap;
   justify-content: flex-start;
 }
-/* line 590, ../sass/styles.scss */
+/* line 624, ../sass/styles.scss */
 .recipeViewer #tags .tag {
   margin: 0 2em 0.5em 0;
   padding: 3px 15px 4px 15px;
   border-radius: 15px;
   cursor: pointer;
 }
-/* line 596, ../sass/styles.scss */
+/* line 630, ../sass/styles.scss */
 .recipeViewer #tags .tag:hover {
   text-decoration: underline;
 }
-/* line 602, ../sass/styles.scss */
+/* line 636, ../sass/styles.scss */
 .recipeViewer .authorSource {
   display: flex;
   flex-flow: row nowrap;
@@ -586,30 +621,30 @@ footer .copyright {
   padding-right: 2vmin;
   margin-top: 1rem;
 }
-/* line 610, ../sass/styles.scss */
+/* line 644, ../sass/styles.scss */
 .recipeViewer .authorSource .author {
   color: #8e8e8e;
 }
-/* line 613, ../sass/styles.scss */
+/* line 647, ../sass/styles.scss */
 .recipeViewer .authorSource .author span {
   color: #000000;
 }
-/* line 618, ../sass/styles.scss */
+/* line 652, ../sass/styles.scss */
 .recipeViewer .authorSource #source {
   cursor: pointer;
 }
-/* line 621, ../sass/styles.scss */
+/* line 655, ../sass/styles.scss */
 .recipeViewer .authorSource #source a {
   text-decoration: underline;
   color: #6ccc85;
 }
-/* line 628, ../sass/styles.scss */
+/* line 662, ../sass/styles.scss */
 .recipeViewer #description {
   font-size: 1.3em;
   margin-top: 1em;
   color: #555555;
 }
-/* line 634, ../sass/styles.scss */
+/* line 668, ../sass/styles.scss */
 .recipeViewer #servings {
   font-size: 1.3em;
   margin-top: 1.3em;
@@ -617,7 +652,7 @@ footer .copyright {
   justify-content: space-between;
   padding-right: 2vmin;
 }
-/* line 641, ../sass/styles.scss */
+/* line 675, ../sass/styles.scss */
 .recipeViewer #servings input {
   font-size: 1em;
   outline: none;
@@ -628,39 +663,39 @@ footer .copyright {
   left: 0.2em;
   background: transparent;
 }
-/* line 654, ../sass/styles.scss */
+/* line 688, ../sass/styles.scss */
 .recipeViewer #oven {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-/* line 659, ../sass/styles.scss */
+/* line 693, ../sass/styles.scss */
 .recipeViewer #oven div {
   width: 1.8em;
   height: 1.8em;
-  margin: 0.05em 0.3em 0 0;
+  margin: 0 0.3em 0.1em 0;
   background-repeat: no-repeat;
   background-size: 75%;
   background-position: center center;
   background-image: url(../img/oven.svg);
 }
-/* line 670, ../sass/styles.scss */
+/* line 704, ../sass/styles.scss */
 .recipeViewer section.ingredients {
   margin-top: 1em;
 }
-/* line 674, ../sass/styles.scss */
+/* line 708, ../sass/styles.scss */
 .recipeViewer #directions {
   margin-top: 1em;
 }
-/* line 677, ../sass/styles.scss */
+/* line 711, ../sass/styles.scss */
 .recipeViewer #directions .directionBreak {
   margin: 1em 0;
 }
-/* line 681, ../sass/styles.scss */
+/* line 715, ../sass/styles.scss */
 .recipeViewer #directions .direction {
   margin-bottom: 1em;
 }
-/* line 697, ../sass/styles.scss */
+/* line 731, ../sass/styles.scss */
 .recipeViewer #directions .timer {
   margin-bottom: 1em;
   width: 105%;
@@ -672,17 +707,17 @@ footer .copyright {
   align-items: center;
   cursor: pointer;
 }
-/* line 708, ../sass/styles.scss */
+/* line 742, ../sass/styles.scss */
 .recipeViewer #directions .timer:hover {
   opacity: 0.9;
 }
-/* line 712, ../sass/styles.scss */
+/* line 746, ../sass/styles.scss */
 .recipeViewer #directions .timer .time {
   padding: 0 0 0 3vmin;
   color: #fafafa;
   font-size: 2em;
 }
-/* line 718, ../sass/styles.scss */
+/* line 752, ../sass/styles.scss */
 .recipeViewer #directions .timer .control {
   padding: 0 3vmin 0 0;
   width: 4rem;
