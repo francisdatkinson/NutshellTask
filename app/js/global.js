@@ -38,7 +38,7 @@ $(document).ready(() => {
   });
 
   // hide recipe viewer on back button click
-  $(".recipeViewer #title div, .recipeViewerOverlay").click(() => {
+  $(".recipeViewer #title div").click(() => {
     hideRecipe();
   });
 
@@ -115,7 +115,7 @@ $(document).ready(() => {
 init = () => {
   $(".recipeViewerOverlay").hide();
   $("#date").text(getYear()); // set current year in footer
-  // $(".filterOptionsWrapper, #oven").hide(); // hide filter options initially
+  $(".filterOptionsWrapper, #oven").hide(); // hide filter options initially
 
   // get recipes from a list of JSON files
   let urls = ['banana-oatmeal-cookie', 'basil-and-pesto-hummus', 'black-bean-and-rice-enchiladas', 'divine-hard-boiled-eggs', 'four-cheese-margherita-pizza', 'homemade-black-bean-veggie-burgers', 'homemade-chicken-enchiladas', 'marinated-grilled-shrimp', 'vegetable-fried-rice', 'vegetarian-korma', 'worlds-best-lasagna'];
@@ -137,51 +137,47 @@ init = () => {
 viewRecipe = (recipes, id) => {
   let recipe = recipes.find(a => a.id == id);
 
-  if (id != state.activeRecipe) {
-    $(".recipeViewerOverlay").fadeIn();
-    $(".recipeViewer").addClass('showRecipeViewer');
-    setTimeout(() => {
-      $("body").css("overflow", "hidden");
-    }, 200);
+
+  $(".recipeViewerOverlay").fadeIn();
+  $(".recipeViewer, .textHider").addClass('showRecipeViewer');
+  setTimeout(() => {
+    $("body").css("overflow", "hidden");
+  }, 200);
+
+  $(".recipeViewer #title p").text(recipe.title);
+
+  $(".recipeViewerOverlay").fadeIn();
+
+
+
+  $(".recipeViewer #tags").empty();
+  $(".recipeViewer #tags").append(getTags(recipe)[0].toString().replace(/[\,\"\']/g, ''));
+
+  $(".recipeViewer #title p").text(recipe.title);
+  $(".recipeViewer .author span").text(recipe.author.name);
+  $(".recipeViewer #source a").attr("href", recipe.author.url);
+
+  $(".recipeViewer #description").text(recipe.description);
+  state.servings = recipe.servings;
+  $(".recipeViewer #servings input").val(state.servings);
+
+  if (getOven(recipe).length > 1) {
+    $(".recipeViewer #oven p").text(getOven(recipe));
+    $(".recipeViewer #oven").show();
   } else {
-    setTimeout(() => {
-      $("body").css("overflow", "hidden");
-    }, 200);
-    $(".recipeViewer #title p").text(recipe.title);
-
-    $(".recipeViewerOverlay").fadeIn();
-
-
-
-    $(".recipeViewer #tags").empty();
-    $(".recipeViewer #tags").append(getTags(recipe)[0].toString().replace(/[\,\"\']/g, ''));
-
-    $(".recipeViewer #title p").text(recipe.title);
-    $(".recipeViewer .author span").text(recipe.author.name);
-    $(".recipeViewer #source a").attr("href", recipe.author.url);
-
-    $(".recipeViewer #description").text(recipe.description);
-    state.servings = recipe.servings;
-    $(".recipeViewer #servings input").val(state.servings);
-
-    if (getOven(recipe).length > 1) {
-      $(".recipeViewer #oven p").text(getOven(recipe));
-      $(".recipeViewer #oven").show();
-    } else {
-      $(".recipeViewer #oven").hide();
-    }
-    
-    $(".recipeViewer .ingredients, .recipeViewer .ingredients .content").text(recipe.ingredients);
-
-    updateIngredients(recipe);
-
-    $(".recipeViewer #directions").empty();
-    $(".recipeViewer #directions").append(getDirections(recipe));
-
-    $(".recipeViewer").addClass('showRecipeViewer');
-
-    getIngredients(recipe);
+    $(".recipeViewer #oven").hide();
   }
+  
+  $(".recipeViewer .ingredients, .recipeViewer .ingredients .content").text(recipe.ingredients);
+
+  updateIngredients(recipe);
+
+  $(".recipeViewer #directions").empty();
+  $(".recipeViewer #directions").append(getDirections(recipe));
+
+  $(".recipeViewer, .textHider").addClass('showRecipeViewer');
+
+  getIngredients(recipe);
 
   state.activeRecipe = id;
 
@@ -309,7 +305,7 @@ getYear = () => {
 
 showRecipeViewer = (show) => {
   if (show) {
-    $(".recipeViewer").addClass('showRecipeViewer');
+    $(".recipeViewer, .textHider").addClass('showRecipeViewer');
   } else {
 
   }
@@ -393,7 +389,7 @@ updateToggles = () => {
 }
 
 hideRecipe = () => {
-  $(".recipeViewer").removeClass('showRecipeViewer');
+  $(".recipeViewer, .textHider").removeClass('showRecipeViewer');
   $(".recipeViewerOverlay").fadeOut(100);
   $("body").css("overflow", "scroll");
 }
