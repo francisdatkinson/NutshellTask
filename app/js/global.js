@@ -163,7 +163,7 @@ viewRecipe = (recipes, id) => {
     $(".recipeViewer #oven").hide();
   }
   
-  $(".recipeViewer .ingredients, .recipeViewer .ingredients .content").text(recipe.ingredients);
+  $(".recipeViewer .ingredients, .recipeViewer .ingredients .content").text(`<p class="ingredientsTitle">Ingredients</p><p>${recipe.ingredients}</p>`);
 
   updateIngredients(recipe);
 

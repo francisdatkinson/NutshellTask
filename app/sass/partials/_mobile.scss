@@ -1,0 +1,84 @@
+nav {
+
+	& .navWrapper {
+		max-width: 1440px;
+	}
+
+	& .logo {
+		display: none;
+	}
+	& .title {
+		white-space: nowrap;
+		margin-left: 1rem;
+		// display: none;
+	}
+
+	& .filterOptionsWrapper {
+		height: 10rem;
+
+		& p {
+			padding: 1rem;
+			white-space: nowrap;
+		}
+
+		& .FOTag {
+			height: auto;
+			& .tags {
+				overflow-x: scroll;
+
+				& .clearTags {
+					height: 1.2em;
+				}
+
+				& .tag {
+					margin-bottom: 1rem;
+				}
+			}
+		}
+	}
+}
+
+.recipeListWrapper {
+	width: 90%;
+
+	& .recipeList {
+		margin: 0 5vw;
+	}
+}
+
+.recipeViewer {
+	height: 100vh;
+	top: 0;
+	border-radius: 0;
+
+	& #title {
+		& p {
+			font-size: 2em;
+		}
+
+		& .escape {
+			background-image: url(../img/cross.svg);
+		}
+	}
+
+	& #tags {
+		width: 100%;
+
+		& .tag {
+			margin-right: 1em;
+		}
+	}
+
+	& #description {
+		margin-top: 1.5em;
+	}
+
+	& .timer {
+		width: 80%;
+	}
+}
+
+.textHider {
+	top: 0;
+	height: 4vh;
+}
