@@ -80,12 +80,16 @@ nav {
 		}
 	}
 
+	& section.ingredients {
+		width: auto;
+	}
+
 	& #description {
 		margin-top: 1.5em;
 	}
 
 	& .timer {
-		width: 80%;
+		width: 60%;
 	}
 }
 

@@ -1,11 +1,10 @@
-let state = {
+let state = { // global variables
   recipes: [],
   activeRecipe: 6,
   showTimers: false,
   temp: [],
   unit: 1,
   servings: 0,
-  showTimers: true,
   query: '',
   filters: {
     tags: {
@@ -26,8 +25,6 @@ $(document).ready(() => {
   console.log("ready");
 
   init();
-  
-  
  
   // add event listeners ///////////////////////////////////////
 
@@ -35,7 +32,6 @@ $(document).ready(() => {
   $(document).keydown((e) => {
     if (e.keyCode == 27) {
       hideRecipe();
-      
     }
   });
 
@@ -43,7 +39,6 @@ $(document).ready(() => {
   $(".recipeViewer #title div").click(() => {
     hideRecipe();
   });
-
 
   // update ingredient quantities based on user defined number of servings
   $(".recipeViewer #servings input").change(() => {
@@ -83,15 +78,14 @@ $(document).ready(() => {
     populateRecipeList(state.recipes);
   });
 
+  // cycle oven temperature units
   $("#oven").click(() => {
     if (state.unit < 2) {
       state.unit++;
     } else {
       state.unit = 0;
     }
-
     let temp = getOven(state.recipes[state.activeRecipe]);
-
     $("#oven p").text(temp);
   });
   
@@ -101,7 +95,7 @@ $(document).ready(() => {
 
 // initialise the page
 init = () => {
-  $(".recipeViewerOverlay").hide();
+  $(".recipeViewerOverlay").hide(); // hide recipe overlay by default
   $("#date").text(getYear()); // set current year in footer
   $(".filterOptionsWrapper, #oven").hide(); // hide filter options initially
 
@@ -109,50 +103,40 @@ init = () => {
   let urls = ['banana-oatmeal-cookie', 'basil-and-pesto-hummus', 'black-bean-and-rice-enchiladas', 'divine-hard-boiled-eggs', 'four-cheese-margherita-pizza', 'homemade-black-bean-veggie-burgers', 'homemade-chicken-enchiladas', 'marinated-grilled-shrimp', 'vegetable-fried-rice', 'vegetarian-korma', 'worlds-best-lasagna'];
   state.recipes = getRecipes(urls);
 
-  state.filters.tags.data = getAllTags(state.recipes);
+  state.filters.tags.data = getAllTags(state.recipes);  // get all tags from recipes
   updateToggles();
   populateRecipeList(state.recipes); // populate recipe list with recipes
-  addFilterTags(state.recipes); // add tags to filter section
+  addFilterTags(state.recipes); // add all tags to tag filter section
 
+  // generate a raondom colour for each tag, then assign the colour to each tag with that name
   generateTagColours(getAllTags(state.recipes));
-
-  
-
   updateTagColours();
-
-  
-  
-
-  console.log('Recipes', state.recipes);
 }
 
 
-viewRecipe = (recipes, id) => {
-  let recipe = recipes.find(a => a.id == id);
+viewRecipe = (recipes, id) => { // loads a given recipe into the recipe viewer
+  let recipe = recipes.find(a => a.id == id); // find the recipe with the provided id
 
-
+  // show the recipe viewer
   $(".recipeViewerOverlay").fadeIn();
   $(".recipeViewer, .textHider").addClass('showRecipeViewer');
   setTimeout(() => {
     $("body").css("overflow", "hidden");
   }, 200);
 
-  $(".recipeViewer #title p").text(recipe.title);
-
-  $(".recipeViewerOverlay").fadeIn();
-
-
-
-  $(".recipeViewer #tags").empty();
-  $(".recipeViewer #tags").append(getTags(recipe)[0].toString().replace(/[\,\"\']/g, ''));
-
+  // assign the recipe data to placeholder elements
   $(".recipeViewer #title p").text(recipe.title);
   $(".recipeViewer .author span").text(recipe.author.name);
   $(".recipeViewer #source a").attr("href", recipe.author.url);
-
   $(".recipeViewer #description").text(recipe.description);
   state.servings = recipe.servings;
   $(".recipeViewer #servings input").val(state.servings);
+
+  // empty the tags container then add the tags from the recipe
+  $(".recipeViewer #tags").empty();
+  $(".recipeViewer #tags").append(getTags(recipe)[0].toString().replace(/[\,\"\']/g, ''));
+
+  
 
   if (getOven(recipe).length > 1) {
     $(".recipeViewer #oven p").text(getOven(recipe));
@@ -161,7 +145,7 @@ viewRecipe = (recipes, id) => {
     $(".recipeViewer #oven").hide();
   }
   
-  $(".recipeViewer .ingredients, .recipeViewer .ingredients .content").text(`<p class="ingredientsTitle">Ingredients</p><p>${recipe.ingredients}</p>`);
+  $(".recipeViewer .ingredients, .recipeViewer .ingredients .content").text(`${recipe.ingredients}`);
 
   updateIngredients(recipe);
 
