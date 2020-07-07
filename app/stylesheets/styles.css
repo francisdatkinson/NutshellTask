@@ -382,7 +382,7 @@ main .recipeListWrapper .recipeList .recipe {
   padding: 20px 20px 15px 20px;
   box-sizing: border-box;
   background: #ffffff;
-  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.15);
+  box-shadow: 6px 6px 25px rgba(0, 0, 0, 0.15);
   margin-bottom: 1rem;
   overflow: hidden;
   transition: all 0.2s ease;
@@ -695,23 +695,27 @@ footer .copyright {
 /* line 715, ../sass/styles.scss */
 .recipeViewer section.ingredients {
   margin-top: 1em;
+  background: #eeeeee;
+  padding: 1rem;
+  border-radius: 1rem;
+  width: 45%;
 }
-/* line 719, ../sass/styles.scss */
+/* line 723, ../sass/styles.scss */
 .recipeViewer #directions {
   margin-top: 1em;
 }
-/* line 722, ../sass/styles.scss */
+/* line 726, ../sass/styles.scss */
 .recipeViewer #directions .directionBreak {
   margin: 1em 0;
 }
-/* line 726, ../sass/styles.scss */
+/* line 730, ../sass/styles.scss */
 .recipeViewer #directions .direction {
   margin-bottom: 1em;
 }
-/* line 742, ../sass/styles.scss */
+/* line 746, ../sass/styles.scss */
 .recipeViewer #directions .timer {
   margin-bottom: 1em;
-  width: 50%;
+  width: 60%;
   height: 4rem;
   background: #6ccc85;
   margin: 1em -3vmin;
@@ -721,17 +725,17 @@ footer .copyright {
   align-items: center;
   cursor: pointer;
 }
-/* line 754, ../sass/styles.scss */
+/* line 758, ../sass/styles.scss */
 .recipeViewer #directions .timer:hover {
   opacity: 0.9;
 }
-/* line 758, ../sass/styles.scss */
+/* line 762, ../sass/styles.scss */
 .recipeViewer #directions .timer .time {
   padding: 0 0 0 3vmin;
   color: #fafafa;
   font-size: 2em;
 }
-/* line 764, ../sass/styles.scss */
+/* line 768, ../sass/styles.scss */
 .recipeViewer #directions .timer .control {
   width: 4rem;
   height: 4rem;
@@ -826,15 +830,19 @@ footer .copyright {
     margin-right: 1em;
   }
   /* line 83, ../sass/partials/_mobile.scss */
+  .recipeViewer section.ingredients {
+    width: auto;
+  }
+  /* line 87, ../sass/partials/_mobile.scss */
   .recipeViewer #description {
     margin-top: 1.5em;
   }
-  /* line 87, ../sass/partials/_mobile.scss */
+  /* line 91, ../sass/partials/_mobile.scss */
   .recipeViewer .timer {
-    width: 80%;
+    width: 60%;
   }
 
-  /* line 92, ../sass/partials/_mobile.scss */
+  /* line 96, ../sass/partials/_mobile.scss */
   .textHider {
     top: 0;
     height: 4vh;

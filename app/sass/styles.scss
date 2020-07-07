@@ -392,7 +392,7 @@ main {
         padding: 20px 20px 15px 20px;
         box-sizing: border-box;
         background: $white;
-        box-shadow: 2px 2px 6px rgba(0,0,0,0.15);
+        box-shadow: 6px 6px 25px rgba(0,0,0,0.15);
         margin-bottom: 1rem;
         overflow: hidden;
         transition: all 0.2s ease;
@@ -714,6 +714,10 @@ footer {
 
   & section.ingredients {
     margin-top: 1em;
+    background: $veryFaded;
+    padding: 1rem;
+    border-radius: 1rem;
+    width: 45%;
   }
 
   & #directions {
@@ -741,7 +745,7 @@ footer {
 
     & .timer {
       margin-bottom: 1em;
-      width: 50%;
+      width: 60%;
       height: 4rem;
       background: $primary;
       margin: 1em -3vmin;
