@@ -16,6 +16,7 @@
   <body>
     <nav>
       <div class="logo"></div>
+      <p>Recipe Manager</p>
       <div class="search">
         <div class="filter"></div>
         <div class="filterOptionsWrapper">
@@ -38,10 +39,10 @@
             </div>
         </div>
         <div class="eyeglass"></div>
-        <input type="text" name="search">
+        <input type="text" name="search" class="searchInput">
       </div>
     </nav>
-    <div class="shift filterVisible">
+    <div class="shift">
       <main>
         <div class="recipeListWrapper">
         </div>
@@ -56,7 +57,8 @@
         &copy; Francis Atkinson <span id="date"></span>
       </div>
     </footer>
-    <!-- <div class="recipeViewerOverlay"> -->
+    <div class="recipeViewerOverlay">
+      <div class="textHider"></div>
       <div class="recipeViewer">
         <section id="title"><div class="escape"></div><p>Title Placeholder</p></section>
         <section id="tags">Tags</section>
