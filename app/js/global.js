@@ -2,6 +2,7 @@ let state = {
   recipes: [],
   activeRecipe: 6,
   showTimers: false,
+  temp: [],
   unit: 1,
   servings: 0,
   showTimers: true,
@@ -82,20 +83,17 @@ $(document).ready(() => {
     populateRecipeList(state.recipes);
   });
 
-  // enable/disable tag filter
-  // $(".FOTag .toggle").click(function() {
-  //   state.filters.tags.enabled = !state.filters.tags.enabled;
-  //   if (state.filters.tags.enabled) {
-  //     $(".FOTaf .tag").removeClass("disabled");
-  //   } else {
-  //     $(".FOTaf .tag").addClass("disabled");
-  //   }
-    
-  //   updateToggles();
-  //   populateRecipeList(state.recipes);
-  // });
+  $("#oven").click(() => {
+    if (state.unit < 2) {
+      state.unit++;
+    } else {
+      state.unit = 0;
+    }
 
-  // add/remove tag from filter list
+    let temp = getOven(state.recipes[state.activeRecipe]);
+
+    $("#oven p").text(temp);
+  });
   
 
   //////////////////////////////////////////////////////////////
@@ -163,7 +161,7 @@ viewRecipe = (recipes, id) => {
     $(".recipeViewer #oven").hide();
   }
   
-  $(".recipeViewer .ingredients, .recipeViewer .ingredients .content").text(recipe.ingredients);
+  $(".recipeViewer .ingredients, .recipeViewer .ingredients .content").text(`<p class="ingredientsTitle">Ingredients</p><p>${recipe.ingredients}</p>`);
 
   updateIngredients(recipe);
 
@@ -423,3 +421,6 @@ updateTagColours = () => {
   });
 }
 
+cycleTemps = () => {
+  $("#oven p").text(state.temp);
+}
